@@ -83,12 +83,17 @@ public class LoginFra extends Fragment implements LoginContract.View {
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }
-
+    /**
+     * 显示加载框
+     */
     @Override
     public void showLoading() {
 
     }
 
+    /**
+     * 隐藏加载框
+     */
     @Override
     public void hideLoading() {
 
