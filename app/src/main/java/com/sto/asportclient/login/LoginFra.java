@@ -1,5 +1,7 @@
 package com.sto.asportclient.login;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 
 import com.sto.asportclient.R;
 import com.sto.asportclient.util.MyToast;
+import com.sto.asportclient.util.WaitDialog;
 
 
 public class LoginFra extends Fragment implements LoginContract.View {
@@ -88,7 +91,10 @@ public class LoginFra extends Fragment implements LoginContract.View {
      */
     @Override
     public void showLoading() {
-
+        WaitDialog dialog = WaitDialog.getInstance(getActivity());
+        dialog.setTitle("登录");
+        dialog.setContent("请稍候...");
+        dialog.show();
     }
 
     /**
@@ -96,7 +102,8 @@ public class LoginFra extends Fragment implements LoginContract.View {
      */
     @Override
     public void hideLoading() {
-
+        Dialog dialog = WaitDialog.getInstance(getActivity());
+        dialog.dismiss();
     }
 
     @Override
