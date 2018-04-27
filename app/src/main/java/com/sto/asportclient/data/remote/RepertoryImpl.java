@@ -2,9 +2,12 @@ package com.sto.asportclient.data.remote;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
+import com.sto.asportclient.util.MyToast;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -15,7 +18,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RepertoryImpl implements Repertory{
-    private Handler handler = new Handler(Looper.getMainLooper());
+
     private static Repertory repertory = new RepertoryImpl();
     private OkHttpClient httpClient = new OkHttpClient();
 
@@ -32,7 +35,7 @@ public class RepertoryImpl implements Repertory{
         form.add("client", "1");
         form.add("username",username);
         form.add("password",password);
-        Request request = new Request.Builder().url(Config.SERURL_STR)
+        Request request = new Request.Builder().url(Config.LOGURL_STR)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("Cookie" ,cookies)
                 .post(form.build())
@@ -40,32 +43,28 @@ public class RepertoryImpl implements Repertory{
 
             httpClient.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    callback.Failed(e.getMessage());
+                public void onFailure(Call call, final IOException e) {
+
+                            callback.Failed(e.getMessage());
+
+
                 }
 
                 @Override
                 public void onResponse(Call call, final Response response) throws IOException {
                     final String res = response.body().string();
-
+                    String tmp =  response.header("Set-Cookie");
+                    if(tmp != null)
+                        cookies = tmp;
                     if(res.equals(Config.SUCCESSFLAG)) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                callback.onSucceed();
-                            }
-                        });
-                        String tmp =  response.header("set-cookies");
-                        if(tmp != null)
-                            cookies = tmp;
+
+                                callback.onSucceed(null);
+
+
                     }
                     else{
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
+
                                 callback.Failed(res);
-                            }
-                        });
 
                     }
 
@@ -81,5 +80,19 @@ public class RepertoryImpl implements Repertory{
     @Override
     public void logout() {
 
+    }
+
+    public void testPage(final LoginListener loginListener) {
+        Request request = new Request.Builder().url(Config.TestURL_STR)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .addHeader("Cookie" ,cookies)
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            final  String res = response.body().string();
+                   loginListener.onSucceed(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

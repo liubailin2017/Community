@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.Display;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.sto.asportclient.R;
@@ -32,6 +34,12 @@ public class WaitDialog extends Dialog{
         setContentView(R.layout.wait_dialog);
         textView = findViewById(R.id.content_view);
         titleView = findViewById(R.id.title_view);
+
+        Display display = getWindow().getWindowManager().getDefaultDisplay();
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.height=display.getHeight()/6;
+        lp.width=display.getWidth()/2;
+        getWindow().setAttributes(lp);
     }
     public void setTitle(String title) {
         titleView.setText(title);

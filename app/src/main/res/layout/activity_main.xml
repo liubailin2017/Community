@@ -4,15 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <FrameLayout
+        android:layout_weight="1"
         android:id="@+id/fra_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-    </FrameLayout>
 
+    </FrameLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="click"
+        android:text="Test" />
 </LinearLayout>
