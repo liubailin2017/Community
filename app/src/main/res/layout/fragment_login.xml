@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout          xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2197db">
-    <ImageView
-        android:id="@+id/logo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:background="@mipmap/ic_launcher"/>
+    android:background="@drawable/logo">
+    <LinearLayout
+        android:id="@+id/headgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/head"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
+        android:layout_below="@+id/headgroup"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"

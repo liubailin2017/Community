@@ -3,14 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+                <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                    android:layout_weight="1"/>
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+        </LinearLayout>
         <TextView
             android:id="@+id/content_view"
             android:layout_width="match_parent"

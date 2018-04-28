@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
@@ -12,6 +13,9 @@ import com.sto.asportclient.login.LoginFra;
 import com.sto.asportclient.util.ActivityUtils;
 import com.sto.asportclient.util.MyToast;
 
+/**
+ * 用于测试的Activity
+ */
 public class MainActivity extends AppCompatActivity implements LoginFra.OnFragmentInteractionListener {
     private Handler handler = new Handler();
     @Override
