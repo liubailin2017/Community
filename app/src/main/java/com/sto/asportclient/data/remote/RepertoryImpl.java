@@ -1,13 +1,7 @@
 package com.sto.asportclient.data.remote;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
-import com.sto.asportclient.util.MyToast;
-
 import java.io.IOException;
 
 import okhttp3.Call;

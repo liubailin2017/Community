@@ -12,6 +12,7 @@ import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.login.LoginFra;
 import com.sto.asportclient.util.ActivityUtils;
 import com.sto.asportclient.util.MyToast;
+import com.sto.asportclient.util.WaitDialog;
 
 /**
  * 用于测试的Activity
@@ -66,4 +67,13 @@ public class MainActivity extends AppCompatActivity implements LoginFra.OnFragme
 
     }
 
+    @Override
+    protected void onDestroy() {
+        /**
+         * 记住销毁这些单例对象
+         */
+        WaitDialog.getInstance(this).destroy();
+        MyToast.getInstance(this).destroy();
+        super.onDestroy();
+    }
 }

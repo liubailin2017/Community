@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.sto.asportclient.R;
 
 public class WaitDialog extends Dialog{
-
+    private Context context;
     private static WaitDialog waitDialog;
     private Runnable onPressBack;
 
@@ -32,6 +32,7 @@ public class WaitDialog extends Dialog{
     TextView textView = null;
     public WaitDialog(@NonNull Context context) {
         super(context);
+        this.context = context;
         setCanceledOnTouchOutside(false);//按对话框以外的地方不起作用，按返回键可以取消对话框
         getWindow().setGravity(Gravity.CENTER);
         setContentView(R.layout.wait_dialog);
@@ -53,5 +54,14 @@ public class WaitDialog extends Dialog{
             onPressBack.run();
             super.onBackPressed();
         }
+    }
+
+    /**
+     * 销毁WaitDialog
+     * 总结：
+     *
+     */
+    public void destroy() {
+        waitDialog = null;
     }
 }

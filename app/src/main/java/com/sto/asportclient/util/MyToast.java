@@ -28,4 +28,8 @@ public class MyToast {
         toast.setText(msg);
         toast.show();
     }
+
+    public void destroy() {
+        myToast = null;
+    }
 }
