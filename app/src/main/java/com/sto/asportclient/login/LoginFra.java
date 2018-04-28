@@ -26,7 +26,7 @@ public class LoginFra extends Fragment implements LoginContract.View {
     private OnFragmentInteractionListener mListener;
 
     public LoginFra() {
-        setPresenter(new LoginPresenter(this));
+        setPresenter(new LoginPresenter(this));  //这里使presenter和view产生关联
     }
 
 
