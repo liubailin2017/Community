@@ -1,33 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout          xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/login_fra"
-    tools:context=".login.LoginFra">
-
+    android:background="#2197db">
+    <ImageView
+        android:id="@+id/logo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="@mipmap/ic_launcher"/>
     <LinearLayout
+        android:id="@+id/input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:background="#fff"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/userView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="账号"
-            android:text="" />
+            <EditText
+                android:id="@+id/userView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:textSize="16sp"
+                android:ems="10"
+                android:hint="请输入用户名"
+                >
+            </EditText>
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_marginLeft="1.0px"
+            android:layout_marginRight="1.0px"
+            android:background="#ffc0c3c4" />
         <EditText
             android:id="@+id/pwView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="密码"
-            android:text="" />
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="登录" />
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="#00ffffff"
+            android:gravity="center_vertical"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:textColor="#ff1d1d1d"
+            android:textColorHint="#ff666666"
+            android:textSize="16.0sp"
+            android:hint="请输入密码"
+            />
     </LinearLayout>
-</FrameLayout>
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input"
+        android:layout_marginTop="10dp"
+        android:background="#3aadfd"
+        android:text="登  录"
+        android:textColor="#ffffff"
+        android:textSize="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"/>
+</RelativeLayout>
