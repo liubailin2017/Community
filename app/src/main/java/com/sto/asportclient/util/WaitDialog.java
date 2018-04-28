@@ -3,6 +3,7 @@ package com.sto.asportclient.util;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.Gravity;
@@ -26,24 +27,19 @@ public class WaitDialog extends Dialog{
     }
 
     TextView textView = null;
-    TextView titleView = null;
     public WaitDialog(@NonNull Context context) {
         super(context);
         setCanceledOnTouchOutside(false);//按对话框以外的地方不起作用，按返回键可以取消对话框
         getWindow().setGravity(Gravity.CENTER);
         setContentView(R.layout.wait_dialog);
         textView = findViewById(R.id.content_view);
-        titleView = findViewById(R.id.title_view);
 
-        Display display = getWindow().getWindowManager().getDefaultDisplay();
         WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.height=display.getHeight()/6;
-        lp.width=display.getWidth()/2;
+        lp.height=480;
+        lp.width=640;
         getWindow().setAttributes(lp);
     }
-    public void setTitle(String title) {
-        titleView.setText(title);
-    }
+
     public void setContent(String content) {
         textView.setText(content);
     }
