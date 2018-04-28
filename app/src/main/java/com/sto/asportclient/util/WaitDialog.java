@@ -1,11 +1,8 @@
 package com.sto.asportclient.util;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -13,7 +10,13 @@ import android.widget.TextView;
 import com.sto.asportclient.R;
 
 public class WaitDialog extends Dialog{
+
     private static WaitDialog waitDialog;
+    private Runnable onPressBack;
+
+    public void setOnPressBack(Runnable onPressBack) {
+        this.onPressBack = onPressBack;
+    }
 
     public static  WaitDialog getInstance(Context context){
         if(waitDialog == null) {
@@ -42,5 +45,13 @@ public class WaitDialog extends Dialog{
 
     public void setContent(String content) {
         textView.setText(content);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(onPressBack != null) {
+            onPressBack.run();
+            super.onBackPressed();
+        }
     }
 }

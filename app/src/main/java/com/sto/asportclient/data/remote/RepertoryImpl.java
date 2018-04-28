@@ -40,14 +40,11 @@ public class RepertoryImpl implements Repertory{
                 .addHeader("Cookie" ,cookies)
                 .post(form.build())
                 .build();
-
-            httpClient.newCall(request).enqueue(new Callback() {
+             Call call = httpClient.newCall(request);
+             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, final IOException e) {
-
                             callback.Failed(e.getMessage());
-
-
                 }
 
                 @Override
