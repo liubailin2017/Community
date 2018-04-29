@@ -6,7 +6,7 @@
 #### 软件架构
 软件架构说明
 
-![](./img__/main.jpg)
+![](./img__/mvp.png)
 
 #### 安装教程
 
@@ -22,7 +22,7 @@
 
 #### 开发者
 
-1. 刘柏麟
+1. [刘柏麟](https://gitee.com/liubailin2017)   [home](https://liubailin2017.github.io/)
 2. 王煜想
 
 ### 参观
