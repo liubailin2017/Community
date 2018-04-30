@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
+import com.amap.api.maps.MapView;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.login.LoginFra;
@@ -19,10 +20,19 @@ import com.sto.asportclient.util.WaitDialog;
  */
 public class MainActivity extends AppCompatActivity implements LoginFra.OnFragmentInteractionListener {
     private Handler handler = new Handler();
+
+    MapView mMapView = null;
+
+    private void initView() {
+        mMapView = (MapView) findViewById(R.id.map);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        mMapView.onCreate(savedInstanceState);
         LoginFra  fra = (LoginFra) getSupportFragmentManager()
                 .findFragmentById(R.id.fra_frame);
         if(fra == null) {
@@ -66,6 +76,18 @@ public class MainActivity extends AppCompatActivity implements LoginFra.OnFragme
         }).start();
 
     }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
+        mMapView.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
+        mMapView.onPause();
+    }
 
     @Override
     protected void onDestroy() {
@@ -74,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements LoginFra.OnFragme
          */
         WaitDialog.getInstance(this).destroy();
         MyToast.getInstance(this).destroy();
+        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
+        mMapView.onDestroy();
         super.onDestroy();
     }
 }

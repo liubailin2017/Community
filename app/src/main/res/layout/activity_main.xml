@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--这是一个测试页面， 比如高德地图控件啊， 和一些开发时的fragment可以暂时放在这个activity里测试一下效果 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,8 +15,6 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
-
-
     </FrameLayout>
     <Button
         android:id="@+id/button"
@@ -23,5 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="click"
-        android:text="Test" />
+        android:text="TestLog" />
+
+    <!--Test 高德地图-->
+    <com.amap.api.maps.MapView
+        android:layout_weight="5"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.amap.api.maps.MapView>
 </LinearLayout>
