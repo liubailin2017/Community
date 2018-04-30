@@ -6,9 +6,14 @@
 
 ![软件架构说明](./img__/mvp.png)
 [参考](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
-#### 开发者
 
-1. [刘柏麟](https://gitee.com/liubailin2017)   [home](https://liubailin2017.github.io/)
+#### 说明
+关于7f700b0提交的说明：
+    高德地图的key需要自己申请，一个key对应一个apk的签名，因此需要自己去申请key
+参考：[如何获取key](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)
+
+#### 开发者
+1. [刘柏麟](https://gitee.com/liubailin2017)   [Home](https://liubailin2017.github.io/)
 2. 王煜想
 
 ### 参观
