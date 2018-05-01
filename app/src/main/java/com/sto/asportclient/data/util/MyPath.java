@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import java.util.Date;
 import java.util.List;
 /**
- * 路径定义
+ * 路径定义,这样定义主要方便用于转化为json
  * @author liubailin
  */
 public class MyPath {
