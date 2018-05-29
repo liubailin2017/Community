@@ -12,8 +12,8 @@ public class Comms {
     private List<CommsBean> comms;
 
     /**
-     * 获取对动态的回复
-     * @return
+     * 移除对动态的回复
+     * @return 对动态的回复
      */
     public ArrayList<CommsBean> removeCommsForDyns() {
         ArrayList<CommsBean> commsBeans = new ArrayList<>();
@@ -28,28 +28,26 @@ public class Comms {
     }
 
     /**
-     * 获取对回复的回复
-     * @param id 回复id
-     * @return
+     * 移除对回复的回复
+     * @param id
+     * @return 返回对回复的回复
      */
     ArrayList<CommsBean> tmp = new ArrayList<>();
     public void clear() {
         tmp.clear();
     }
     public ArrayList<CommsBean> removeCommsForComms(CommsBean forComms) {
-
-        ArrayList<CommsBean> commsBeans  = new ArrayList<>();
         /**
          * 递归遍历
          */
-        for(int i = 0; i< comms.size();i++) {
+        for(int i = comms.size()-1; i>=0;i--) {
             CommsBean t = comms.get(i);
-            t.setForComms_nickName(forComms.getStu_nickName());
-            t.setForComms_nmb(forComms.getStu_nmb());
             if(t.getCom_commnet_id() == forComms.getComment().getComment_id()) {
+                t.setForComms_nickName(forComms.getStu_nickName());
+                t.setForComms_nmb(forComms.getStu_nmb());
                 tmp.add(t);
                 comms.remove(i);
-                i--;
+//                i--;
                 removeCommsForComms(t);
             }
         }

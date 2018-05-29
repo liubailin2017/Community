@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sto.asportclient.data.util.bean.User;
 
 public class Config {
-    public static final String IP = "192.168.1.101";
+    public static final String IP = "45.40.202.230";
     /**
      * 登录 url
      */

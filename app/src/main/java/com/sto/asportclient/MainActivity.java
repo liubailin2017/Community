@@ -76,18 +76,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.getDataListener<Comms>() {
+                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(8, new Repertory.getDataListener<Comms>() {
                     @Override
                     public void onSucceed(final Comms data) {
-                        Log.i("++++++++++++","_+++++++++++++");
+                        Log.i("data",data.toString());
                         ArrayList<Comms.CommsBean> arrayList = data.removeCommsForDyns();
                         for(int i = 0; i< arrayList.size();i++) {
-                            Log.i("------","+"+arrayList.get(i).getStu_nickName()+"："+arrayList.get(i).getComment().getContent());
+                            Log.i(arrayList.get(i).getStu_nickName()+"回复"+arrayList.get(i).getForComms_nickName(),"+"+arrayList.get(i).getComment().getContent());
 
                             data.clear();
                             ArrayList<Comms.CommsBean> arrayList2 = data.removeCommsForComms(arrayList.get(i));
                             for(int j =0;j< arrayList2.size();j++) {
-                                Log.i("-------",arrayList2.get(j).getStu_nickName()+arrayList2.get(j).getComment().getContent());
+                                Log.i(arrayList2.get(j).getStu_nickName()+"回复"+arrayList2.get(j).getForComms_nickName(),arrayList2.get(j).getComment().getContent());
                             }
                         }
                     }
