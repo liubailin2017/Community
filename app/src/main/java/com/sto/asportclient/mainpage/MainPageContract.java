@@ -1,13 +1,12 @@
-package com.sto.asportclient.login;
+package com.sto.asportclient.mainpage;
 
 import android.app.Activity;
-import android.content.Intent;
 
-import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.util.bean.User;
+import com.sto.asportclient.login.LoginContract;
 
-public class LoginContract {
+public class MainPageContract {
 
     public static interface View extends BaseView{
         /**
@@ -22,13 +21,11 @@ public class LoginContract {
 
         public void showMsg(String msg);
 
-        public  void toActivity(Class< ? extends Activity> activity,User user);
+        public  void toActivity(Class< ? extends Activity> activity, User user);
 
-        public void finish();
     }
 
-    public static interface Presenter extends BasePresenter{
-        public void login(String username,String password);
+    public static interface Presenter {
+        public void setView(LoginContract.View view);
     }
-
 }

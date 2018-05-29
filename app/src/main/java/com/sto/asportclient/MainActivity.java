@@ -4,21 +4,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
 import com.amap.api.maps.MapView;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
+import com.sto.asportclient.data.util.bean.Comms;
 import com.sto.asportclient.login.LoginFra;
 import com.sto.asportclient.util.ActivityUtils;
 import com.sto.asportclient.util.MyToast;
 import com.sto.asportclient.util.WaitDialog;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * 用于测试的Activity
  */
-public class MainActivity extends AppCompatActivity implements LoginFra.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
 
     MapView mMapView = null;
@@ -41,41 +46,6 @@ public class MainActivity extends AppCompatActivity implements LoginFra.OnFragme
         }
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    public void click(View view) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                RepertoryImpl.getInstance().testPage(new Repertory.LoginListener() {
-                    @Override
-                    public void onSucceed(final String msg) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                MyToast.getInstance(MainActivity.this).ShowToast(msg);
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void Failed(final String msg) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                MyToast.getInstance(MainActivity.this).ShowToast(msg);
-                            }
-                        });
-                    }
-                });
-            }
-        }).start();
-
-    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -100,4 +70,34 @@ public class MainActivity extends AppCompatActivity implements LoginFra.OnFragme
         mMapView.onDestroy();
         super.onDestroy();
     }
+
+    public void click(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.getDataListener<Comms>() {
+                    @Override
+                    public void onSucceed(final Comms data) {
+                        Log.i("++++++++++++","_+++++++++++++");
+                        ArrayList<Comms.CommsBean> arrayList = data.removeCommsForDyns();
+                        for(int i = 0; i< arrayList.size();i++) {
+                            Log.i("------","+"+arrayList.get(i).getStu_nickName()+"："+arrayList.get(i).getComment().getContent());
+
+                            data.clear();
+                            ArrayList<Comms.CommsBean> arrayList2 = data.removeCommsForComms(arrayList.get(i));
+                            for(int j =0;j< arrayList2.size();j++) {
+                                Log.i("-------",arrayList2.get(j).getStu_nickName()+arrayList2.get(j).getComment().getContent());
+                            }
+                        }
+                    }
+                    @Override
+                    public void Failed(Repertory.FailedMsg msg) {
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 }

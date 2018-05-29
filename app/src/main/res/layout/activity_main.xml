@@ -16,9 +16,10 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
     </FrameLayout>
+
     <Button
         android:id="@+id/button"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="click"
@@ -26,7 +27,7 @@
 
     <!--Test 高德地图-->
     <com.amap.api.maps.MapView
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
