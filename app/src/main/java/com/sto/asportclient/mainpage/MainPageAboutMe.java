@@ -33,32 +33,7 @@ public class MainPageAboutMe extends AppCompatActivity {
 
 
     public void click(View view) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.getDataListener<Comms>() {
-                    @Override
-                    public void onSucceed(final Comms data) {
-                        Log.i("++++++++++++","_+++++++++++++");
-                                ArrayList<Comms.CommsBean> arrayList = data.removeCommsForDyns();
-                                for(int i = 0; i< arrayList.size();i++) {
-                                    Log.i("------","+"+arrayList.get(i).getStu_nickName()+"："+arrayList.get(i).getComment().getContent());
-
-                                    data.clear();
-                                    ArrayList<Comms.CommsBean> arrayList2 = data.removeCommsForComms(arrayList.get(i));
-                                    for(int j =0;j< arrayList2.size();j++) {
-                                        Log.i("-------",arrayList2.get(j).getStu_nickName()+arrayList2.get(j).getComment().getContent());
-                                    }
-                                 }
-                    }
-                    @Override
-                    public void Failed(Repertory.FailedMsg msg) {
-
-                    }
-                });
-            }
-        }).start();
     }
 
 }

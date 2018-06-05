@@ -1,12 +1,10 @@
 package com.sto.asportclient;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 
 import com.amap.api.maps.MapView;
 import com.sto.asportclient.data.Repertory;
@@ -18,7 +16,6 @@ import com.sto.asportclient.util.MyToast;
 import com.sto.asportclient.util.WaitDialog;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * 用于测试的Activity
@@ -52,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
         mMapView.onSaveInstanceState(outState);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -76,16 +74,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(8, new Repertory.getDataListener<Comms>() {
+                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.getDataListener<Comms>() {
                     @Override
                     public void onSucceed(final Comms data) {
                         Log.i("data",data.toString());
                         ArrayList<Comms.CommsBean> arrayList = data.removeCommsForDyns();
                         for(int i = 0; i< arrayList.size();i++) {
                             Log.i(arrayList.get(i).getStu_nickName()+"回复"+arrayList.get(i).getForComms_nickName(),"+"+arrayList.get(i).getComment().getContent());
-
-                            data.clear();
-                            ArrayList<Comms.CommsBean> arrayList2 = data.removeCommsForComms(arrayList.get(i));
+                            data.removeCommsForComms(arrayList.get(i));
+                            ArrayList<Comms.CommsBean> arrayList2 = data.back();
                             for(int j =0;j< arrayList2.size();j++) {
                                 Log.i(arrayList2.get(j).getStu_nickName()+"回复"+arrayList2.get(j).getForComms_nickName(),arrayList2.get(j).getComment().getContent());
                             }

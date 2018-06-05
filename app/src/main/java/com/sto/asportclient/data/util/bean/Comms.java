@@ -33,25 +33,33 @@ public class Comms {
      * @return 返回对回复的回复
      */
     ArrayList<CommsBean> tmp = new ArrayList<>();
-    public void clear() {
-        tmp.clear();
+
+    public ArrayList<CommsBean> back() {
+        ArrayList t = tmp;
+        tmp = new ArrayList<>();
+        return t;
     }
-    public ArrayList<CommsBean> removeCommsForComms(CommsBean forComms) {
+
+    public int removeCommsForComms(CommsBean forComms) {
+        int count = 0;
         /**
          * 递归遍历
          */
         for(int i = comms.size()-1; i>=0;i--) {
+//            if(i > comms.size()-1) i = comms.size()-1;
             CommsBean t = comms.get(i);
             if(t.getCom_commnet_id() == forComms.getComment().getComment_id()) {
                 t.setForComms_nickName(forComms.getStu_nickName());
                 t.setForComms_nmb(forComms.getStu_nmb());
                 tmp.add(t);
                 comms.remove(i);
-//                i--;
-                removeCommsForComms(t);
+                count++;
+                int n =  removeCommsForComms(t);
+                count += n;
+                i-=n;
             }
         }
-        return tmp;
+        return count;
     }
 
     public List<CommsBean> getComms() {
