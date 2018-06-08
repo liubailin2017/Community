@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * 用于测试的Activity
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private Handler handler = new Handler();
 
     MapView mMapView = null;
@@ -59,12 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        /**
-         * 记住销毁这些单例对象
-         */
-        WaitDialog.getInstance(this).destroy();
-        MyToast.getInstance(this).destroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
         super.onDestroy();
     }
@@ -74,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.getDataListener<Comms>() {
+                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.GetDataListener<Comms>() {
                     @Override
                     public void onSucceed(final Comms data) {
                         Log.i("data",data.toString());

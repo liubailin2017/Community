@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.util.MyToast;
@@ -68,8 +69,8 @@ public class LoginFra extends Fragment implements LoginContract.View {
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(BasePresenter presenter) {
+        this.presenter = (LoginContract.Presenter) presenter;
     }
     /**
      * 显示加载框

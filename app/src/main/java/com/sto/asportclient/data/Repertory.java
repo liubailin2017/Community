@@ -15,8 +15,8 @@ public interface Repertory {
      * 失败时返回的消息
      */
     public class  FailedMsg {
-        int code;
-        String msg;
+        private int code;
+        private String msg;
 
         public FailedMsg() {
         }
@@ -33,13 +33,21 @@ public interface Repertory {
         public void setCode(int code) {
             this.code = code;
         }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
     }
 
     /**
      * 用来获取数据的
      * @param <T>
      */
-    public static interface  getDataListener<T> {
+    public static interface GetDataListener<T> {
         public void onSucceed(T data);
         public void Failed(FailedMsg msg);
     }

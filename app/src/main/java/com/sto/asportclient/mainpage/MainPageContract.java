@@ -2,9 +2,10 @@ package com.sto.asportclient.mainpage;
 
 import android.app.Activity;
 
+import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.BaseView;
+import com.sto.asportclient.data.util.bean.Dyns.DynsBean;
 import com.sto.asportclient.data.util.bean.User;
-import com.sto.asportclient.login.LoginContract;
 
 public class MainPageContract {
 
@@ -23,9 +24,19 @@ public class MainPageContract {
 
         public  void toActivity(Class< ? extends Activity> activity, User user);
 
+        public void upDateShowData(DynsBean dyns);
+        public void upDateShowData2(DynsBean dyns);
+        public void addData(DynsBean dyns);
+        public void addData2(DynsBean dyns);
+
+        public void clearData();
+        public void clearData2();
     }
 
-    public static interface Presenter {
-        public void setView(LoginContract.View view);
+    public static interface Presenter extends BasePresenter {
+        public void updateMydyn();
+
+        public void updateClassmete();
+
     }
 }

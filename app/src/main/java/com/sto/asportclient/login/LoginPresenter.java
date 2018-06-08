@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.data.util.bean.User;
@@ -58,8 +59,9 @@ public class LoginPresenter implements LoginContract.Presenter {
         this.view = view;
     }
 
+
     @Override
-    public void setView(LoginContract.View view) {
-        this.view = view;
+    public void setView(BaseView view) {
+        this.view = (LoginContract.View) view;
     }
 }

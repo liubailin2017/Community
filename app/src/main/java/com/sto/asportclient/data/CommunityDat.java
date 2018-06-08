@@ -1,6 +1,11 @@
 package com.sto.asportclient.data;
 
+import android.content.Intent;
+
 import com.sto.asportclient.data.util.bean.Comms;
+import com.sto.asportclient.data.util.bean.Dyns;
+
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 
@@ -11,6 +16,11 @@ public interface CommunityDat {
 
     public void setOkhttpClient(OkHttpClient okHttpClient);
 
-    public void getComments(long dyn,Repertory.getDataListener<Comms> listener);
+    public void getComments(long dyn,Repertory.GetDataListener<Comms> listener);
 
+    public void getDyns(Long stu_nmb, Repertory.GetDataListener<Dyns> listener);
+
+    public void getDynsSelect(Long stu_nmb, Integer pageNo, Integer pageSize, Repertory.GetDataListener<Dyns> listener);
+
+    public void getClassmateDyns(Long stu_nmb, Integer pageNo, final Integer pageSize, Repertory.GetDataListener<Dyns> listener);
 }
