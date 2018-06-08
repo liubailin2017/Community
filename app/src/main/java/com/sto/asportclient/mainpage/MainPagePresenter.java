@@ -34,7 +34,7 @@ public class MainPagePresenter implements MainPageContract.Presenter {
 
     @Override
     public void updateMydyn() {
-        view.showLoading();
+        view.showLoading1();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -46,15 +46,22 @@ public class MainPagePresenter implements MainPageContract.Presenter {
                             @Override
                             public void run() {
                                 view.upDateShowData(data.getDyns());
-                                view.hideLoading();
+                                view.hideLoading1();
                                 view.showMsg("更新完成");
                             }
                         });
                     }
 
                     @Override
-                    public void Failed(Repertory.FailedMsg msg) {
-                        view.showMsg(msg.getMsg());
+                    public void Failed(final Repertory.FailedMsg msg) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.showMsg(msg.getMsg());
+                                view.hideLoading1();
+                            }
+                        });
+
                     }
                 });
             }
@@ -63,7 +70,7 @@ public class MainPagePresenter implements MainPageContract.Presenter {
 
     @Override
     public void updateClassmete() {
-        view.showLoading();
+        view.showLoading2();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -75,14 +82,21 @@ public class MainPagePresenter implements MainPageContract.Presenter {
                             @Override
                             public void run() {
                                 view.upDateShowData2(data.getDyns());
-                                view.hideLoading();
+                                view.hideLoading2();
                                 view.showMsg("更新完成");
                             }
                         });
                     }
                     @Override
-                    public void Failed(Repertory.FailedMsg msg) {
-                        view.showMsg(msg.getMsg());
+                    public void Failed(final Repertory.FailedMsg msg) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.showMsg(msg.getMsg());
+                                view.hideLoading1();
+                            }
+                        });
+
                     }
                 });
             }

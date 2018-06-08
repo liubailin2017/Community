@@ -13,12 +13,13 @@ public class MainPageContract {
         /**
          * 显示加载框
          */
-        public void showLoading();
-
+        public void showLoading1();
+        public void showLoading2();
         /**
          * 隐藏加载框
          */
-        public void hideLoading();
+        public void hideLoading1();
+        public void hideLoading2();
 
         public void showMsg(String msg);
 

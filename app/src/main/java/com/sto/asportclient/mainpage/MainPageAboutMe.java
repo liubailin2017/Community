@@ -44,6 +44,8 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         user = (User) getIntent().getExtras().get("user");
         tv_nickname = $$(R.id.tv_nickName);
         tv_nickname.setText(user.getNickname());
+        swip1 = $$(R.id.swipe1);
+        swip2 = $$(R.id.swipe2);
         listView = $$(R.id.tv_mydyns);
         listView2 = $$(R.id.tv_classmatedyns);
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
@@ -55,14 +57,11 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         presenter.updateMydyn();
         presenter.updateClassmete();
 
-        swip1 = $$(R.id.swipe1);
-        swip2 = $$(R.id.swipe2);
 
         swip1.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 presenter.updateMydyn();
-                swip1.setRefreshing(false);
             }
         });
 
@@ -85,26 +84,26 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
 
     public void click(View view) {
     }
-    /**
-     * 显示加载框
-     */
+
     @Override
-    public void showLoading() {
-        WaitDialog dialog = WaitDialog.getInstance(this);
-        dialog.setTitle("登录");
-        dialog.setContent("请稍候...");
-        dialog.show();
+    public void showLoading1() {
+        swip1.setRefreshing(true);
     }
 
-    /**
-     * 隐藏加载框
-     */
     @Override
-    public void hideLoading() {
-        Dialog dialog = WaitDialog.getInstance(this);
-        dialog.dismiss();
+    public void showLoading2() {
+        swip2.setRefreshing(true);
     }
 
+    @Override
+    public void hideLoading1() {
+        swip1.setRefreshing(false);
+    }
+
+    @Override
+    public void hideLoading2() {
+        swip2.setRefreshing(false);
+    }
 
     @Override
     public void showMsg(String msg) {
