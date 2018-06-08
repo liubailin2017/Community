@@ -67,6 +67,13 @@ public class CommunityDatImp implements CommunityDat {
         getDynsSelect(stu_nmb,null,null,listener);
     }
 
+    /**
+     * 获得指定人的动态
+     * @param stu_nmb 学号 如果为null，则为当前登录用户
+     * @param pageNo
+     * @param pageSize
+     * @param listener
+     */
     @Override
     public void getDynsSelect(Long stu_nmb, Integer pageNo, final Integer pageSize, final Repertory.GetDataListener<Dyns> listener) {
         Request request;
@@ -106,6 +113,13 @@ public class CommunityDatImp implements CommunityDat {
         });
     }
 
+    /**
+     * 同学的动态
+     * @param stu_nmb stu_nmb学号学生的同学的动态
+     * @param pageNo
+     * @param pageSize
+     * @param listener
+     */
     @Override
     public void getClassmateDyns(Long stu_nmb, Integer pageNo, final Integer pageSize, final Repertory.GetDataListener<Dyns> listener) {
         Request request;

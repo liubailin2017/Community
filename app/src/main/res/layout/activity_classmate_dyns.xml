@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mydyns.MyDynsActivity"
+    android:orientation="vertical">
+    <com.sto.asportclient.util.RefreshLayout
+        android:id="@+id/classmateDyns_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/tv_classmatedyn_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="2dp">
+        </ListView>
+    </com.sto.asportclient.util.RefreshLayout>
+</LinearLayout>

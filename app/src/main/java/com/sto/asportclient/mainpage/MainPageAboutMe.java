@@ -1,11 +1,9 @@
 package com.sto.asportclient.mainpage;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,20 +11,16 @@ import android.widget.TextView;
 import com.sto.asportclient.BaseActivity;
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
+import com.sto.asportclient.classmatedyns.ClassMateDynsActivity;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.mainpage.adapter.DynAdapter;
+import com.sto.asportclient.mydyns.MyDynsActivity;
 import com.sto.asportclient.util.MyToast;
-import com.sto.asportclient.util.WaitDialog;
 
 import java.util.ArrayList;
 
 public class MainPageAboutMe extends BaseActivity implements MainPageContract.View{
-
-
-    public <T extends View> T $$(int id) {
-        return findViewById(id);
-    }
 
     private MainPageContract.Presenter presenter;
 
@@ -159,5 +153,17 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (MainPageContract.Presenter) presenter;
+    }
+
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.myDyns_line:
+                toActivity(MyDynsActivity.class,user);
+                break;
+            case R.id.classmate_line:
+                toActivity(ClassMateDynsActivity.class,user);
+                break;
+        }
     }
 }

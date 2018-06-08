@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sto.asportclient">
 
-
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
@@ -23,8 +22,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="4fb5dfd2909536c77e89103318091a5f">
-        </meta-data>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="4fb5dfd2909536c77e89103318091a5f"></meta-data>
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -34,7 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mainpage.MainPageAboutMe"></activity>
+        <activity
+            android:name=".mainpage.MainPageAboutMe"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".mydyns.MyDynsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".classmatedyns.ClassMateDynsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

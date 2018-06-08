@@ -1,4 +1,4 @@
-package com.sto.asportclient.mydyns;
+package com.sto.asportclient.classmatedyns;
 
 import android.app.Activity;
 
@@ -21,7 +21,7 @@ public class MyDynsContract {
         public void hideLoadingBttom();
         public void showMsg(String msg);
 
-        public  void toActivity(Class< ? extends Activity> activity, User user);
+        public  void toActivity(Class<? extends Activity> activity, User user);
 
         public void upDateShowData(Dyns.DynsBean dyns);
 

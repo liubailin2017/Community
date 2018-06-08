@@ -23,51 +23,23 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
     private Handler handler = new Handler();
 
-    MapView mMapView = null;
-
-    private void initView() {
-        mMapView = (MapView) findViewById(R.id.map);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        mMapView.onCreate(savedInstanceState);
-        LoginFra  fra = (LoginFra) getSupportFragmentManager()
-                .findFragmentById(R.id.fra_frame);
+        LoginFra  fra = (LoginFra) getSupportFragmentManager().findFragmentById(R.id.fra_frame);
         if(fra == null) {
             fra = new LoginFra();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fra, R.id.fra_frame);
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
-        mMapView.onSaveInstanceState(outState);
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
-        mMapView.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mMapView.onDestroy();
-        super.onDestroy();
-    }
 
     public void click(View view) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.GetDataListener<Comms>() {
                     @Override
                     public void onSucceed(final Comms data) {

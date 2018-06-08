@@ -9,6 +9,7 @@ import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.mainpage.MainPageAboutMe;
+import com.sto.asportclient.mydyns.MyDynsActivity;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
