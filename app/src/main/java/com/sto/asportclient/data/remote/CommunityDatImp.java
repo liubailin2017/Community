@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sto.asportclient.data.CommunityDat;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
+import com.sto.asportclient.data.util.bean.AddDynBean;
 import com.sto.asportclient.data.util.bean.Comms;
 import com.sto.asportclient.data.util.bean.Dyns;
 
@@ -157,5 +158,10 @@ public class CommunityDatImp implements CommunityDat {
                 }
             }
         });
+    }
+
+    @Override
+    public void pushDyn(Long stu_nmb, String title, String content, String img, Repertory.GetDataListener<AddDynBean> listener) {
+
     }
 }

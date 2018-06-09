@@ -44,7 +44,7 @@
             android:id="@+id/tv_mydyns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dividerHeight="1dp">
+            android:dividerHeight="0dp">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -65,7 +65,7 @@
             android:id="@+id/tv_classmatedyns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dividerHeight="1dp">
+            android:dividerHeight="0dp">
          </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 

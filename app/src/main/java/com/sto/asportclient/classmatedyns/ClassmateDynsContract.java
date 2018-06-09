@@ -7,7 +7,7 @@ import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
 
-public class MyDynsContract {
+public class ClassmateDynsContract {
 
     public static interface View extends BaseView {
         /**

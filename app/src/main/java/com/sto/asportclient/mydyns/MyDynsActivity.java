@@ -3,44 +3,46 @@ package com.sto.asportclient.mydyns;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.widget.ListView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sto.asportclient.BaseActivity;
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
+import com.sto.asportclient.adddyn.AddDynActivity;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.mydyns.adapter.DynAdapter;
 import com.sto.asportclient.util.MyToast;
-import com.sto.asportclient.util.RefreshLayout;
 
 import java.util.ArrayList;
 
 public class MyDynsActivity extends BaseActivity implements MyDynsContract.View {
     private  User user;
-    private RefreshLayout swip;
+    private SmartRefreshLayout swip;
     private ListView listView;
     private MyDynsContract.Presenter presenter;
     private DynAdapter adapter;
     private  void init() {
-        swip = $$(R.id.myDyns_swipe);
+        swip = $$(R.id.mydyns_refreshLayout);
         listView = $$(R.id.tv_mydyn_listview);
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
         adapter = new DynAdapter(this,dynsBean,presenter);
         listView.setAdapter(adapter);
         presenter = new MyDynsPresenter(this,user);
+
         presenter.updateMydyn();
-        swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swip.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
-            public void onRefresh() {
-                presenter.updateMydyn();
+            public void onLoadmore(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
+                presenter.loadNext();
             }
-        });
-        swip.setOnLoadListener(new RefreshLayout.OnLoadListener() {
+
             @Override
-            public void onLoad() {
-                   presenter.loadNext();
+            public void onRefresh(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
+                presenter.updateMydyn();
             }
         });
     }
@@ -55,17 +57,17 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
 
     @Override
     public void showRefreshing() {
-        swip.setRefreshing(true);
+        swip.autoRefresh();
     }
 
     @Override
     public void hideRefreshing() {
-        swip.setRefreshing(false);
+        swip.finishRefresh();
     }
 
     @Override
     public void hideLoadingBttom() {
-        swip.setLoading(false);
+        swip.finishLoadmore();
     }
 
     @Override
@@ -101,5 +103,13 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (MyDynsContract.Presenter) presenter;
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.addDynBtn :
+                toActivity(AddDynActivity.class,user);
+                break;
+        }
     }
 }

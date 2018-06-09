@@ -77,7 +77,7 @@ public class DynAdapter extends BaseAdapter{
 
     public void addDynsBean(Dyns.DynsBean list){
         for(Dyns.DynsBean.DynBean dynBean : list.getList())
-         this.list.getList().add(dynBean);
+             this.list.getList().add(dynBean);
     }
 
     public void clear() {

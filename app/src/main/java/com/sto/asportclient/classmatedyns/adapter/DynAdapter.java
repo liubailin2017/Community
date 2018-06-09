@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sto.asportclient.R;
-import com.sto.asportclient.classmatedyns.MyDynsContract;
+import com.sto.asportclient.classmatedyns.ClassmateDynsContract;
 import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.util.bean.Dyns;
 
 import java.util.ArrayList;
 
 public class DynAdapter extends BaseAdapter{
-    private MyDynsContract.Presenter presenter;
+    private ClassmateDynsContract.Presenter presenter;
     private Context mContext;
     private Dyns.DynsBean list;
 
-    public DynAdapter(Context mContext, Dyns.DynsBean list, MyDynsContract.Presenter presenter) {
+    public DynAdapter(Context mContext, Dyns.DynsBean list, ClassmateDynsContract.Presenter presenter) {
         this.list = list;
         this.mContext = mContext;
         this.presenter = presenter;

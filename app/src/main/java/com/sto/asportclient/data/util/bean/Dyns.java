@@ -215,6 +215,21 @@ public class Dyns {
             public void setTitle(String title) {
                 this.title = title;
             }
+
+            @Override
+            public String toString() {
+                return "DynBean{" +
+                        "content='" + content + '\'' +
+                        ", dynId=" + dynId +
+                        ", imgId=" + imgId +
+                        ", nickName='" + nickName + '\'' +
+                        ", stu_nmb=" + stu_nmb +
+                        ", time=" + time +
+                        ", title='" + title + '\'' +
+                        '}';
+            }
         }
+
+
     }
 }

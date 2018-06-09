@@ -3,46 +3,56 @@ package com.sto.asportclient.classmatedyns;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.widget.ListView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.sto.asportclient.BaseActivity;
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
 import com.sto.asportclient.classmatedyns.adapter.DynAdapter;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
-import com.sto.asportclient.util.RefreshLayout;
 import com.sto.asportclient.util.MyToast;
 
 import java.util.ArrayList;
 
-public class ClassMateDynsActivity extends BaseActivity implements MyDynsContract.View {
+public class ClassMateDynsActivity extends BaseActivity implements ClassmateDynsContract.View {
     private  User user;
-    private RefreshLayout swip;
+    private SmartRefreshLayout swip;
     private ListView listView;
-    private MyDynsContract.Presenter presenter;
+    private ClassmateDynsContract.Presenter presenter;
     private DynAdapter adapter;
     private  void init() {
-        swip = $$(R.id.classmateDyns_swipe);
+        swip = $$(R.id.classmate_refreshLayout);
         listView = $$(R.id.tv_classmatedyn_listview);
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
         adapter = new DynAdapter(this,dynsBean,presenter);
         listView.setAdapter(adapter);
-        presenter = new MyDynsPresenter(this,user);
+        presenter = new ClassmateDynsPresenter(this,user);
         presenter.updateMydyn();
-        swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        swip.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
-            public void onRefresh() {
+            public void onLoadmore(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
+                presenter.loadNext();
+                Log.i("onlocad","++++++++++++++");
+            }
+
+            @Override
+            public void onRefresh(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
                 presenter.updateMydyn();
+                Log.i("onrefresh","+++++++++++++++++++++++");
             }
         });
-        swip.setOnLoadListener(new RefreshLayout.OnLoadListener() {
-            @Override
-            public void onLoad() {
-                   presenter.loadNext();
-            }
-        });
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                MyToast.getInstance(ClassMateDynsActivity.this).ShowToast(position+"");
+//            }
+//        });
     }
 
     @Override
@@ -55,17 +65,17 @@ public class ClassMateDynsActivity extends BaseActivity implements MyDynsContrac
 
     @Override
     public void showRefreshing() {
-        swip.setRefreshing(true);
+         swip.autoRefresh();
     }
 
     @Override
     public void hideRefreshing() {
-        swip.setRefreshing(false);
+        swip.finishRefresh();
     }
 
     @Override
     public void hideLoadingBttom() {
-        swip.setLoading(false);
+        swip.finishLoadmore();
     }
 
     @Override
@@ -100,6 +110,6 @@ public class ClassMateDynsActivity extends BaseActivity implements MyDynsContrac
 
     @Override
     public void setPresenter(BasePresenter presenter) {
-        this.presenter = (MyDynsContract.Presenter) presenter;
+        this.presenter = (ClassmateDynsContract.Presenter) presenter;
     }
 }

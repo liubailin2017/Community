@@ -2,6 +2,7 @@ package com.sto.asportclient.classmatedyns;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.CommunityDat;
@@ -9,13 +10,14 @@ import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
+import com.sto.asportclient.util.MyToast;
 
-public class MyDynsPresenter implements MyDynsContract.Presenter {
-    private MyDynsContract.View view;
+public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
+    private ClassmateDynsContract.View view;
     private User user;
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    public MyDynsPresenter(MyDynsContract.View view, User user) {
+    public ClassmateDynsPresenter(ClassmateDynsContract.View view, User user) {
         this.user = user;
         this.view = view;
     }
@@ -30,7 +32,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                 /**
                  * 这里是更新，不是加载，别看错了。
                  */
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
+                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,6, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
 
@@ -40,8 +42,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                                 view.upDateShowData(data.getDyns());
                                 view.hideRefreshing();
                                 curPageNo = data.getDyns().getPageNo();
-                                pageSize = data.getDyns().getPageSize();
-                                    view.showMsg("更新完成");
+                                view.showMsg("更新完成");
 
                             }
                         });
@@ -62,7 +63,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
         }).start();
     }
 
-    private int pageSize = 6;
+    private int pageSize = 2;
     private int curPageNo = 1;
 
     @Override
@@ -71,7 +72,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),curPageNo+1,6, new Repertory.GetDataListener<Dyns>() {
+                repertory.getClassmateDyns(Long.parseLong(user.getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         curPageNo = data.getDyns().getPageNo();
@@ -79,14 +80,15 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+
                                 view.addData(data.getDyns());
-                                view.hideLoadingBttom();
-                                if(curPageNo > data.getDyns().getBottomPageNo()) {
+                                if(curPageNo >= data.getDyns().getBottomPageNo()) {
                                     view.showMsg("没有更多数据了");
                                     curPageNo = data.getDyns().getBottomPageNo();
                                 }
                                 else
                                     view.showMsg("加载完成");
+                                view.hideLoadingBttom();
                             }
                         });
                     }
@@ -108,6 +110,6 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
 
     @Override
     public void setView(BaseView view) {
-        this.view = (MyDynsContract.View) view;
+        this.view = (ClassmateDynsContract.View) view;
     }
 }

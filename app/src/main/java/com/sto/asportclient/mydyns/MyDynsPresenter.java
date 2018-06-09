@@ -40,9 +40,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                                 view.upDateShowData(data.getDyns());
                                 view.hideRefreshing();
                                 curPageNo = data.getDyns().getPageNo();
-                                pageSize = data.getDyns().getPageSize();
-                                    view.showMsg("更新完成");
-
+                                view.showMsg("更新完成");
                             }
                         });
                     }
@@ -81,7 +79,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                             public void run() {
                                 view.addData(data.getDyns());
                                 view.hideLoadingBttom();
-                                if(curPageNo > data.getDyns().getBottomPageNo()) {
+                                if(curPageNo >= data.getDyns().getBottomPageNo()) {
                                     view.showMsg("没有更多数据了");
                                     curPageNo = data.getDyns().getBottomPageNo();
                                 }
