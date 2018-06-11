@@ -29,12 +29,12 @@
     <!-- 分隔线-->
     <TextView
         android:id="@+id/myDyns_line"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我的最新动态 ..."
+        android:background="@android:color/holo_green_light"
         android:gravity="center"
-        android:background="@android:color/holo_green_light" />
+        android:onClick="onClick"
+        android:text="我的最新动态" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe1"
         android:layout_width="match_parent"
@@ -44,18 +44,19 @@
             android:id="@+id/tv_mydyns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:divider="#00000000"
             android:dividerHeight="0dp">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
-            android:id="@+id/classmate_line"
-            android:onClick="onClick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="同学的最新动态 ..."
-            android:gravity="center"
-            android:background="@android:color/holo_green_light" />
+        android:id="@+id/classmate_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="同学的最新动态" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe2"
         android:layout_width="match_parent"
@@ -65,6 +66,7 @@
             android:id="@+id/tv_classmatedyns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:divider="#00000000"
             android:dividerHeight="0dp">
          </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>

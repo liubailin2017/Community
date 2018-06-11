@@ -56,6 +56,7 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
             @Override
             public void onRefresh() {
                 presenter.updateMydyn();
+                toActivity(MyDynsActivity.class,user);
             }
         });
 
@@ -63,7 +64,7 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
             @Override
             public void onRefresh() {
                 presenter.updateClassmete();
-                swip2.setRefreshing(false);
+                toActivity(ClassMateDynsActivity.class,user);
             }
         });
     }

@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-    <Button
-        android:text="拍照"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="10dp"
-        android:id="@+id/button"
-        android:onClick="takePhone"
-        />
-    <Button
-        android:text="相册选择"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="10dp"
-        android:onClick="choosePhone"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/image"
-        android:src="@color/colorAccent"
-        android:scaleType="centerCrop"
-        android:layout_weight="7"/>
-</LinearLayout>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/holo_blue_bright"
+                android:onClick="choosePhone"
+                android:text="相册选择" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/colorAccent"
+                android:scaleType="centerCrop"/>
+            <EditText
+                android:id="@+id/add_edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="title"
+                android:text="" />
+            <EditText
+                android:id="@+id/add_edit_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="content"
+                android:text="" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/holo_green_dark"
+                android:onClick="upload"
+                android:text="发表" />
+        </LinearLayout>
+
+    </ScrollView>

@@ -11,14 +11,18 @@ import com.sto.asportclient.data.util.bean.AddDynBean;
 import com.sto.asportclient.data.util.bean.Comms;
 import com.sto.asportclient.data.util.bean.Dyns;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CommunityDatImp implements CommunityDat {
@@ -143,7 +147,7 @@ public class CommunityDatImp implements CommunityDat {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                listener.Failed(new Repertory.FailedMsg(0,e.getMessage()));
+                listener.Failed(new Repertory.FailedMsg(Config.ErrCode.NETREFUSE,e.getMessage()));
             }
 
             @Override
@@ -154,14 +158,48 @@ public class CommunityDatImp implements CommunityDat {
                     listener.onSucceed(dyns);
                 }catch (Exception e) {
                     e.printStackTrace();
-                    listener.Failed(new Repertory.FailedMsg(0,e.getMessage()));
+                    listener.Failed(new Repertory.FailedMsg(Config.ErrCode.SERVICESERR,e.getMessage()));
                 }
             }
         });
     }
 
     @Override
-    public void pushDyn(Long stu_nmb, String title, String content, String img, Repertory.GetDataListener<AddDynBean> listener) {
+    public void pushDyn(String title, String content, File img, final Repertory.GetDataListener<AddDynBean> listener) {
 
+
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("content",content)
+                .addFormDataPart("title",title);
+
+        if(img != null) {
+            RequestBody img1 = RequestBody.create(MediaType.parse("image/png"),img);
+            builder.addFormDataPart("img1","img",img1);
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(Config.URL_STR_AddDyn)
+                .post(requestBody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.Failed(new Repertory.FailedMsg(Config.ErrCode.NETREFUSE,e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                try {
+                    AddDynBean resObj = JSON.parseObject(res,AddDynBean.class);
+                    listener.onSucceed(resObj);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    listener.Failed(new Repertory.FailedMsg(Config.ErrCode.SERVICESERR,e.getMessage()));
+                }
+            }
+        });
     }
 }

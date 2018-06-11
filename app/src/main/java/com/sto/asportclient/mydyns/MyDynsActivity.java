@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.sto.asportclient.BaseActivity;
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
@@ -34,14 +35,14 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
         presenter = new MyDynsPresenter(this,user);
 
         presenter.updateMydyn();
-        swip.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+        swip.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void onLoadmore(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
+            public void onLoadMore(RefreshLayout refreshLayout) {
                 presenter.loadNext();
             }
 
             @Override
-            public void onRefresh(com.scwang.smartrefresh.layout.api.RefreshLayout refreshlayout) {
+            public void onRefresh(RefreshLayout refreshLayout) {
                 presenter.updateMydyn();
             }
         });

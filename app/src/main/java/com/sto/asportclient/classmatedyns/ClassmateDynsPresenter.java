@@ -17,6 +17,9 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
     private User user;
     private Handler handler = new Handler(Looper.getMainLooper());
 
+    private int pageSize = 6;
+    private int curPageNo = 1;
+
     public ClassmateDynsPresenter(ClassmateDynsContract.View view, User user) {
         this.user = user;
         this.view = view;
@@ -32,7 +35,7 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
                 /**
                  * 这里是更新，不是加载，别看错了。
                  */
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,6, new Repertory.GetDataListener<Dyns>() {
+                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
 
@@ -63,8 +66,6 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
         }).start();
     }
 
-    private int pageSize = 2;
-    private int curPageNo = 1;
 
     @Override
     public void loadNext() {
@@ -80,15 +81,15 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-
                                 view.addData(data.getDyns());
+                                view.hideLoadingBttom();
                                 if(curPageNo >= data.getDyns().getBottomPageNo()) {
                                     view.showMsg("没有更多数据了");
                                     curPageNo = data.getDyns().getBottomPageNo();
                                 }
                                 else
                                     view.showMsg("加载完成");
-                                view.hideLoadingBttom();
+
                             }
                         });
                     }

@@ -47,7 +47,6 @@ public class MainPagePresenter implements MainPageContract.Presenter {
                             public void run() {
                                 view.upDateShowData(data.getDyns());
                                 view.hideLoading1();
-                                view.showMsg("更新完成");
                             }
                         });
                     }
@@ -75,7 +74,7 @@ public class MainPagePresenter implements MainPageContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,2, new Repertory.GetDataListener<Dyns>() {
+                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,4, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         handler.post(new Runnable() {
@@ -83,7 +82,6 @@ public class MainPagePresenter implements MainPageContract.Presenter {
                             public void run() {
                                 view.upDateShowData2(data.getDyns());
                                 view.hideLoading2();
-                                view.showMsg("更新完成");
                             }
                         });
                     }

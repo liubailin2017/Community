@@ -8,34 +8,45 @@
     android:orientation="vertical">
 
 
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/mydyns_refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.header.StoreHouseHeader
+        app:shhText="Waiting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-              <Button
-                android:id="@+id/addDynBtn"
-                android:layout_margin="0dp"
-                android:layout_gravity="center"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00ff00"
-                android:onClick="onClick"
-            android:text="添加动态" />
-             <ListView
-                android:id="@+id/tv_mydyn_listview"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dividerHeight="0dp">
-            </ListView>
+                android:layout_height="match_parent">
+                 <ListView
+                    android:id="@+id/tv_mydyn_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     android:divider="#00000000"
+                    android:dividerHeight="0dp">
+                </ListView>
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/addDynBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    app:backgroundTint="#ff87ffeb"
+                    app:fab_colorNormal="@color/colorPrimary"
+                    android:src="@android:drawable/ic_menu_add"
+                    android:onClick="onClick"/>
+         </FrameLayout>
     </LinearLayout>
-
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

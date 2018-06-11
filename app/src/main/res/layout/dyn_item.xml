@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/tv_DynImg"
-                android:layout_gravity="left"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
-
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="@drawable/card_foreground_selector"
+        android:layout_margin="2dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tv_title"
+
+                <ImageView
+                    android:id="@+id/tv_DynImg"
+                    android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="标题"
-                    android:textSize="18dp"
-                    android:gravity="center"/>
+                    android:layout_height="wrap_content"/>
+                <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16dp"
+                android:gravity="right"/>
                 <TextView
                     android:id="@+id/tv_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="内容"
+                    android:text=""
                     android:textSize="12dp"
                     android:gravity="center"/>
-            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -41,6 +41,14 @@ public interface Repertory {
         public void setMsg(String msg) {
             this.msg = msg;
         }
+
+        @Override
+        public String toString() {
+            return "FailedMsg{" +
+                    "code=" + code +
+                    ", msg='" + msg + '\'' +
+                    '}';
+        }
     }
 
     /**

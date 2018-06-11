@@ -3,6 +3,9 @@ package com.sto.asportclient.data.config;
 import com.alibaba.fastjson.JSON;
 import com.sto.asportclient.data.util.bean.User;
 
+/**
+ *  <a href="http://45.40.202.230:8080/asport">接口说明</a>
+ */
 public class Config {
     /**
      * 服务器地址
@@ -23,4 +26,11 @@ public class Config {
     public static final String TestURL_STR = "http://"+IP+":8080/asport/classMateDyn.do";
 
     public static  final String URL_STR_GETCLASSMATEDYNS = "http://"+IP+":8080/asport/classMateDyn.do";
+
+    public static final  String URL_STR_AddDyn = "http://"+IP+":8080/asport/addDyn.do";
+
+    public static class ErrCode {
+        public static int NETREFUSE = 0; //网络没连通
+        public static int SERVICESERR = 1; //服务出错
+    }
 }

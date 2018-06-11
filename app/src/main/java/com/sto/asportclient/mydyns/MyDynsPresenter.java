@@ -15,6 +15,9 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
     private User user;
     private Handler handler = new Handler(Looper.getMainLooper());
 
+    private int pageSize = 6;
+    private int curPageNo = 1;
+
     public MyDynsPresenter(MyDynsContract.View view, User user) {
         this.user = user;
         this.view = view;
@@ -60,8 +63,6 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
         }).start();
     }
 
-    private int pageSize = 6;
-    private int curPageNo = 1;
 
     @Override
     public void loadNext() {
@@ -69,7 +70,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getDynsSelect(Long.parseLong(user.getUser()),curPageNo+1,6, new Repertory.GetDataListener<Dyns>() {
+                repertory.getDynsSelect(Long.parseLong(user.getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         curPageNo = data.getDyns().getPageNo();
