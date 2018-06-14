@@ -1,8 +1,5 @@
 package com.sto.asportclient.data.config;
 
-import com.alibaba.fastjson.JSON;
-import com.sto.asportclient.data.util.bean.User;
-
 /**
  *  <a href="http://45.40.202.230:8080/asport">接口说明</a>
  */
@@ -15,19 +12,19 @@ public class Config {
      * 登录 url
      */
     public static final String LOGURL_STR = "http://"+IP+":8080/asport/login.do";
+    /**
+     * 获取评论接口
+     */
     public static final String URL_STR_GETCOMMS = "http://"+IP+":8080/asport/getcomments.do";
 
     public  static  final String URL_STR_GETDYN = "http://"+IP+":8080/asport/myDyns.do";
+
     public  static final  String url_str_dynimg_base = "http://"+IP+":8080/asport/dynImg.png?id=";
-    /**
-     * 用于测试的url
-     * 当登录过后，用来测试能否访问对应的资源
-     */
-    public static final String TestURL_STR = "http://"+IP+":8080/asport/classMateDyn.do";
 
     public static  final String URL_STR_GETCLASSMATEDYNS = "http://"+IP+":8080/asport/classMateDyn.do";
 
     public static final  String URL_STR_AddDyn = "http://"+IP+":8080/asport/addDyn.do";
+    public static final  String URL_STR_DelDyn = "http://"+IP+":8080/asport/delDyn.do";
 
     public static class ErrCode {
         public static int NETREFUSE = 0; //网络没连通

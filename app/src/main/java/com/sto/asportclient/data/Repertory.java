@@ -1,5 +1,7 @@
 package com.sto.asportclient.data;
 
+import android.content.Context;
+
 import com.sto.asportclient.data.util.bean.User;
 
 /**
@@ -69,5 +71,5 @@ public interface Repertory {
      * @return
      */
     public  CommunityDat getCommunityDatInstance();
-
+    public Config getConfig(Context context);
 }

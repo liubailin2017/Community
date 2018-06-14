@@ -11,9 +11,6 @@ public class Dyns {
      */
 
     private DynsBean dyns;
-    private int schoolId;
-    private int stu_nmb;
-
     public DynsBean getDyns() {
         return dyns;
     }
@@ -22,21 +19,6 @@ public class Dyns {
         this.dyns = dyns;
     }
 
-    public int getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(int schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public int getStu_nmb() {
-        return stu_nmb;
-    }
-
-    public void setStu_nmb(int stu_nmb) {
-        this.stu_nmb = stu_nmb;
-    }
 
     /**
      * 这个才是实际的动态数据，上一层是一控制的数据。
@@ -153,10 +135,10 @@ public class Dyns {
              */
 
             private String content;
-            private int dynId;
-            private int imgId;
+            private Long dynId;
+            private Long imgId;
             private String nickName;
-            private int stu_nmb;
+            private Long stu_nmb;
             private long time;
             private String title;
 
@@ -168,19 +150,19 @@ public class Dyns {
                 this.content = content;
             }
 
-            public int getDynId() {
+            public Long getDynId() {
                 return dynId;
             }
 
-            public void setDynId(int dynId) {
+            public void setDynId(Long dynId) {
                 this.dynId = dynId;
             }
 
-            public int getImgId() {
+            public Long getImgId() {
                 return imgId;
             }
 
-            public void setImgId(int imgId) {
+            public void setImgId(Long imgId) {
                 this.imgId = imgId;
             }
 
@@ -192,11 +174,11 @@ public class Dyns {
                 this.nickName = nickName;
             }
 
-            public int getStu_nmb() {
+            public Long getStu_nmb() {
                 return stu_nmb;
             }
 
-            public void setStu_nmb(int stu_nmb) {
+            public void setStu_nmb(Long stu_nmb) {
                 this.stu_nmb = stu_nmb;
             }
 

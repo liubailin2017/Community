@@ -72,13 +72,13 @@ public class Comms {
 
     public static class CommsBean {
 
-        private int stu_nmb;
+        private Long stu_nmb;
         private String stu_nickName;
         private String forComms_nickName;
-        private int forComms_nmb;
-        private int dyn;
+        private Long forComms_nmb;
+        private Long dyn;
         private CommentBean comment;
-        private int com_commnet_id;
+        private Long com_commnet_id;
 
 
         public String getForComms_nickName() {
@@ -89,11 +89,11 @@ public class Comms {
             this.forComms_nickName = forComms_nickName;
         }
 
-        public int getForComms_nmb() {
+        public Long getForComms_nmb() {
             return forComms_nmb;
         }
 
-        public void setForComms_nmb(int forComms_nmb) {
+        public void setForComms_nmb(Long forComms_nmb) {
             this.forComms_nmb = forComms_nmb;
         }
 
@@ -105,19 +105,19 @@ public class Comms {
             this.stu_nickName = stu_nickName;
         }
 
-        public int getStu_nmb() {
+        public Long getStu_nmb() {
             return stu_nmb;
         }
 
-        public void setStu_nmb(int stu_nmb) {
+        public void setStu_nmb(Long stu_nmb) {
             this.stu_nmb = stu_nmb;
         }
 
-        public int getDyn() {
+        public Long getDyn() {
             return dyn;
         }
 
-        public void setDyn(int dyn) {
+        public void setDyn(Long dyn) {
             this.dyn = dyn;
         }
 
@@ -129,11 +129,11 @@ public class Comms {
             this.comment = comment;
         }
 
-        public int getCom_commnet_id() {
+        public Long getCom_commnet_id() {
             return com_commnet_id;
         }
 
-        public void setCom_commnet_id(int com_commnet_id) {
+        public void setCom_commnet_id(Long com_commnet_id) {
             this.com_commnet_id = com_commnet_id;
         }
 

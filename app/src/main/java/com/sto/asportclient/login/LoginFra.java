@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.sto.asportclient.BasePresenter;
@@ -25,15 +26,13 @@ public class LoginFra extends Fragment implements LoginContract.View {
     private EditText userView =null;
     private EditText pwView = null;
     private Button button = null;
+    private CheckBox checkBox_remember;
     private LoginContract.Presenter presenter;
-
-    public LoginFra() {
-        setPresenter(new LoginPresenter(this));  //这里使presenter和view产生关联
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setPresenter(new LoginPresenter(this));  //这里使presenter和view产生关联
     }
 
     @Override
@@ -48,6 +47,8 @@ public class LoginFra extends Fragment implements LoginContract.View {
         pwView = getView().findViewById(R.id.pwView);
         userView = getView().findViewById(R.id.userView);
         button = getView().findViewById(R.id.loginBtn);
+        checkBox_remember = getView().findViewById(R.id.checkbox_remember_pwd);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +57,7 @@ public class LoginFra extends Fragment implements LoginContract.View {
                 presenter.login(username,password);
             }
         });
+        presenter.recovery();
     }
 
     @Override
@@ -92,6 +94,16 @@ public class LoginFra extends Fragment implements LoginContract.View {
         dialog.dismiss();
     }
 
+    @Override
+    public void setUser_pwd(String user, String passwd) {
+        userView.setText(user);
+        pwView.setText(passwd);
+    }
+
+    @Override
+    public boolean isCheckRemember() {
+        return checkBox_remember.isChecked();
+    }
 
     @Override
     public void showMsg(String msg) {
@@ -109,6 +121,10 @@ public class LoginFra extends Fragment implements LoginContract.View {
     public void finish() {
         getActivity().finish();
     }
-
+// fragment 已经实现了 getContext()
+//    @Override
+//    public Context getContext(){
+//        return super.getContext();
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.sto.asportclient.classmatedyns;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,5 +110,10 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (ClassmateDynsContract.Presenter) presenter;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

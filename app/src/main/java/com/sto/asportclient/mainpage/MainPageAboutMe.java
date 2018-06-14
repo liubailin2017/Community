@@ -1,11 +1,11 @@
 package com.sto.asportclient.mainpage;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sto.asportclient.BaseActivity;
@@ -20,6 +20,8 @@ import com.sto.asportclient.util.MyToast;
 
 import java.util.ArrayList;
 
+import link.fls.swipestack.SwipeStack;
+
 public class MainPageAboutMe extends BaseActivity implements MainPageContract.View{
 
     private MainPageContract.Presenter presenter;
@@ -27,10 +29,8 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
     private TextView tv_nickname;
     private User user;
     private DynAdapter adapter,adapter2;
-    private ListView listView;
-    private  ListView listView2;
-    private SwipeRefreshLayout swip1,swip2;
-
+    private Toolbar toolbar;
+    private SwipeStack swipeStack1,swipeStack2;
     public User curUser() {
         return  user;
     }
@@ -38,35 +38,50 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         user = (User) getIntent().getExtras().get("user");
         tv_nickname = $$(R.id.tv_nickName);
         tv_nickname.setText(user.getNickname());
-        swip1 = $$(R.id.swipe1);
-        swip2 = $$(R.id.swipe2);
-        listView = $$(R.id.tv_mydyns);
-        listView2 = $$(R.id.tv_classmatedyns);
+        toolbar = $$(R.id.main_toolbar);
+        swipeStack1 = $$(R.id.swipeStack1);
+        swipeStack2 = $$(R.id.swipeStack2);
+        setSupportActionBar(toolbar);
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
         adapter = new DynAdapter(MainPageAboutMe.this,dynsBean,presenter);
         adapter2 = new DynAdapter(MainPageAboutMe.this,dynsBean,presenter);
-        listView2.setAdapter(adapter2);
-        listView.setAdapter(adapter);
-        setPresenter((BasePresenter) new MainPagePresenter(this,user));
+        swipeStack1.setAdapter(adapter);
+        swipeStack2.setAdapter(adapter2);
+        swipeStack1.setListener(new SwipeStack.SwipeStackListener() {
+            @Override
+            public void onViewSwipedToLeft(int position) {
+
+            }
+
+            @Override
+            public void onViewSwipedToRight(int position) {
+
+            }
+
+            @Override
+            public void onStackEmpty() {
+                swipeStack1.resetStack();
+            }
+        });
+        swipeStack2.setListener(new SwipeStack.SwipeStackListener() {
+            @Override
+            public void onViewSwipedToLeft(int position) {
+
+            }
+
+            @Override
+            public void onViewSwipedToRight(int position) {
+
+            }
+
+            @Override
+            public void onStackEmpty() {
+                swipeStack2.resetStack();
+            }
+        });
+        setPresenter(new MainPagePresenter(this,user));
         presenter.updateMydyn();
         presenter.updateClassmete();
-
-
-        swip1.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.updateMydyn();
-                toActivity(MyDynsActivity.class,user);
-            }
-        });
-
-        swip2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.updateClassmete();
-                toActivity(ClassMateDynsActivity.class,user);
-            }
-        });
     }
 
 
@@ -77,27 +92,25 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         init();
     }
 
-    public void click(View view) {
-    }
 
     @Override
     public void showLoading1() {
-        swip1.setRefreshing(true);
+
     }
 
     @Override
     public void showLoading2() {
-        swip2.setRefreshing(true);
+
     }
 
     @Override
     public void hideLoading1() {
-        swip1.setRefreshing(false);
+
     }
 
     @Override
     public void hideLoading2() {
-        swip2.setRefreshing(false);
+
     }
 
     @Override
@@ -156,13 +169,20 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         this.presenter = (MainPageContract.Presenter) presenter;
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.myDyns_line:
+                presenter.updateMydyn();
                 toActivity(MyDynsActivity.class,user);
                 break;
             case R.id.classmate_line:
+                presenter.updateClassmete();
                 toActivity(ClassMateDynsActivity.class,user);
                 break;
         }

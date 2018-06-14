@@ -40,6 +40,8 @@ public class MyDynsContract {
           */
         public void loadNext();
 
+
+        public void deleteDyn(Long dynId);
     }
 
 }

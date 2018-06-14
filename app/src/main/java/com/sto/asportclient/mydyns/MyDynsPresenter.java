@@ -7,8 +7,10 @@ import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.CommunityDat;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
+import com.sto.asportclient.data.util.bean.DelDynBean;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
+import com.sto.asportclient.util.MyToast;
 
 public class MyDynsPresenter implements MyDynsContract.Presenter {
     private MyDynsContract.View view;
@@ -104,6 +106,44 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
             }
         }).start();
     }
+
+    @Override
+    public void deleteDyn(final Long dynId) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
+                /**
+                 * 这里是更新，不是加载，别看错了。
+                 */
+                repertory.deleteDyn(dynId, new Repertory.GetDataListener<DelDynBean>() {
+
+                    @Override
+                    public void onSucceed(DelDynBean data) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateMydyn();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void Failed(final Repertory.FailedMsg msg) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.showMsg("删除失败："+msg);
+                            }
+                        });
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
     @Override
     public void setView(BaseView view) {

@@ -13,7 +13,9 @@ import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.mainpage.MainPageContract.Presenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DynAdapter extends BaseAdapter{
     private Presenter presenter;
@@ -46,7 +48,7 @@ public class DynAdapter extends BaseAdapter{
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.dyn_item,null);
+            convertView = View.inflate(mContext, R.layout.mainpage_item,null);
             holder.title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.content = (TextView) convertView.findViewById(R.id.tv_content);
             holder.img = (ImageView) convertView.findViewById(R.id.tv_DynImg);
@@ -56,8 +58,8 @@ public class DynAdapter extends BaseAdapter{
         }
 
         Dyns.DynsBean.DynBean item = list.getList().get(position);
-        holder.title.setText(item.getTitle()+"("+item.getNickName()+")");
-        holder.content.setText(item.getContent());
+        holder.title.setText(item.getTitle());
+        holder.content.setText(new Date(item.getTime()).toString()+" by " + item.getNickName());
         Glide.with(mContext)
                 .load(Config.url_str_dynimg_base+item.getImgId())
                 .into(holder.img);

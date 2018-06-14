@@ -39,7 +39,7 @@ public class MainPagePresenter implements MainPageContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getDynsSelect(Long.parseLong(user.getUser()),1,2, new Repertory.GetDataListener<Dyns>() {
+                repertory.getDynsSelect(Long.parseLong(user.getUser()),1,5, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         handler.post(new Runnable() {
@@ -74,7 +74,7 @@ public class MainPagePresenter implements MainPageContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,4, new Repertory.GetDataListener<Dyns>() {
+                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,5, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         handler.post(new Runnable() {

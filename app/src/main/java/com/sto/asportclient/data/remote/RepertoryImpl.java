@@ -1,9 +1,12 @@
 package com.sto.asportclient.data.remote;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.sto.asportclient.data.CommunityDat;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
+import com.sto.asportclient.data.local.LocalSimpleData;
 import com.sto.asportclient.data.util.bean.User;
 
 import java.io.IOException;
@@ -117,5 +120,10 @@ public class RepertoryImpl implements Repertory{
         }
         communityDatInstance.setOkhttpClient(httpClient);
         return communityDatInstance;
+    }
+
+    @Override
+    public com.sto.asportclient.data.Config getConfig(Context context) {
+        return LocalSimpleData.getInstance(context);
     }
 }

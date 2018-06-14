@@ -1,10 +1,15 @@
 package com.sto.asportclient.mydyns;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -26,14 +31,27 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     private ListView listView;
     private MyDynsContract.Presenter presenter;
     private DynAdapter adapter;
+    private TextView nicknameView;
+    private Toolbar toolbar;
     private  void init() {
+        toolbar = $$(R.id.mydyns_toolbar);
         swip = $$(R.id.mydyns_refreshLayout);
         listView = $$(R.id.tv_mydyn_listview);
+        nicknameView = $$(R.id.tv_nickName_mydyn);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
+        presenter = new MyDynsPresenter(this,user);
         adapter = new DynAdapter(this,dynsBean,presenter);
         listView.setAdapter(adapter);
-        presenter = new MyDynsPresenter(this,user);
-
+        listView.setNestedScrollingEnabled(true);
+        nicknameView.setText(user.getNickname());
         presenter.updateMydyn();
         swip.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -46,6 +64,12 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
                 presenter.updateMydyn();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.updateMydyn();
     }
 
     @Override
@@ -68,7 +92,7 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
 
     @Override
     public void hideLoadingBttom() {
-        swip.finishLoadmore();
+        swip.finishLoadMore();
     }
 
     @Override
@@ -104,6 +128,11 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (MyDynsContract.Presenter) presenter;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     public void onClick(View view) {

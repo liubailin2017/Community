@@ -1,6 +1,11 @@
 package com.sto.asportclient.mydyns.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sto.asportclient.R;
 import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.mydyns.MyDynsContract;
+import com.sto.asportclient.util.MyToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +29,7 @@ public class DynAdapter extends BaseAdapter{
     private Context mContext;
     private Dyns.DynsBean list;
 
-    public DynAdapter(Context mContext, Dyns.DynsBean list, MyDynsContract.Presenter presenter) {
+    public DynAdapter(Context mContext, Dyns.DynsBean list,@NonNull MyDynsContract.Presenter presenter) {
         this.list = list;
         this.mContext = mContext;
         this.presenter = presenter;
@@ -44,7 +51,7 @@ public class DynAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -52,12 +59,37 @@ public class DynAdapter extends BaseAdapter{
             holder.title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.content = (TextView) convertView.findViewById(R.id.tv_content);
             holder.img = (ImageView) convertView.findViewById(R.id.tv_DynImg);
+            holder.cardView = convertView.findViewById(R.id.item_cardview);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        final Dyns.DynsBean.DynBean item = list.getList().get(position);
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(item != null) {
+                    AlertDialog dialog = new AlertDialog.Builder(mContext)
+                            .setTitle("提示")
+                            .setMessage("确定删除这条动态吗？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    presenter.deleteDyn(item.getDynId());
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-        Dyns.DynsBean.DynBean item = list.getList().get(position);
+                                }
+                            })
+                            .show();
+
+                }
+                return false;
+            }
+        });
         holder.title.setText(item.getTitle());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
         holder.content.setText(item.getContent()+"\n"+new Date(item.getTime()).toString());
@@ -72,6 +104,7 @@ public class DynAdapter extends BaseAdapter{
         TextView title;
         TextView content;
         ImageView img;
+        CardView cardView;
     }
 
     public void setDynsBean(Dyns.DynsBean list){

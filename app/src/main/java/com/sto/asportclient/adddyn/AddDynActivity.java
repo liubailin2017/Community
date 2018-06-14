@@ -2,6 +2,7 @@ package com.sto.asportclient.adddyn;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,11 +31,14 @@ import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.CommunityDatImp;
 import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.data.util.bean.AddDynBean;
+import com.sto.asportclient.util.ImgUtil;
+import com.sto.asportclient.util.MyToast;
 import com.sto.asportclient.util.WaitDialog;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class AddDynActivity extends BaseActivity implements AddDynContract.View {
@@ -119,7 +123,7 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
 
     @Override
     public void showMsg(String msg) {
-
+        MyToast.getInstance(this).ShowToast(msg);
     }
 
     @Override
@@ -129,7 +133,12 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
 
     @Override
     public void setPresenter(BasePresenter presenter) {
+        this.presenter = (AddDynContract.Presenter) presenter;
+    }
 
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     void initView(){
@@ -185,7 +194,9 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
 
     public void upload(View view) {
         Log.i("file:","com.sto.asportclient.adddyn.AddDynActivity:"+updateFile);
-        if(updateFile != null) updateFile =  CompressHelper.getDefault(this).compressToFile(updateFile);
+         if(updateFile != null && !"gif".equals(ImgUtil.getImageType(updateFile.getPath())))
+             if(updateFile != null) updateFile =  CompressHelper.getDefault(this).compressToFile(updateFile);
         presenter.addDyn(editText_title.getText().toString(),editText_content.getText().toString(),updateFile);
+
     }
 }

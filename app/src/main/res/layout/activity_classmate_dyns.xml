@@ -9,18 +9,15 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/classmate_refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <com.scwang.smartrefresh.header.StoreHouseHeader
         app:shhText="Waiting"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
-        android:id="@+id/mydyns_refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <ListView
             android:id="@+id/tv_classmatedyn_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="#00000000"
             android:dividerHeight="0dp">
         </ListView>

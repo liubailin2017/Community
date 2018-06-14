@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">校园社区</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">School Community</string>
+    <string name="main_page_aboutme_name">Home</string>
+    <string name="my_dyn_head">My Dynamic</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

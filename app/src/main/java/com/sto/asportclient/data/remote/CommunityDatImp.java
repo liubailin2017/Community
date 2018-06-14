@@ -9,6 +9,7 @@ import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.util.bean.AddDynBean;
 import com.sto.asportclient.data.util.bean.Comms;
+import com.sto.asportclient.data.util.bean.DelDynBean;
 import com.sto.asportclient.data.util.bean.Dyns;
 
 import java.io.File;
@@ -166,8 +167,6 @@ public class CommunityDatImp implements CommunityDat {
 
     @Override
     public void pushDyn(String title, String content, File img, final Repertory.GetDataListener<AddDynBean> listener) {
-
-
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("content",content)
                 .addFormDataPart("title",title);
@@ -202,4 +201,35 @@ public class CommunityDatImp implements CommunityDat {
             }
         });
     }
+
+    @Override
+    public void deleteDyn(Long dynId, final Repertory.GetDataListener<DelDynBean> listener) {
+        FormBody formBody = new FormBody.Builder().add("dynId",""+dynId).build();
+        Request request = new Request.Builder()
+                .url(Config.URL_STR_DelDyn)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .post(formBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.Failed(new Repertory.FailedMsg(Config.ErrCode.NETREFUSE,e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                try {
+                    DelDynBean resObj = JSON.parseObject(res,DelDynBean.class);
+                    listener.onSucceed(resObj);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    listener.Failed(new Repertory.FailedMsg(Config.ErrCode.SERVICESERR,e.getMessage()));
+                }
+            }
+        });
+    }
+
+
 }

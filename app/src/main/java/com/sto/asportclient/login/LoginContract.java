@@ -10,6 +10,7 @@ import com.sto.asportclient.data.util.bean.User;
 public class LoginContract {
 
     public static interface View extends BaseView{
+
         /**
          * 显示加载框
          */
@@ -20,6 +21,9 @@ public class LoginContract {
          */
         public void hideLoading();
 
+        public void setUser_pwd(String user,String passwd);
+        public boolean isCheckRemember();
+
         public void showMsg(String msg);
 
         public  void toActivity(Class< ? extends Activity> activity,User user);
@@ -29,6 +33,8 @@ public class LoginContract {
 
     public static interface Presenter extends BasePresenter{
         public void login(String username,String password);
+        public void remember(String username,String password);
+        public void recovery();
     }
 
 }

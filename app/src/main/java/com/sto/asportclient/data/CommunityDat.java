@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.sto.asportclient.data.util.bean.AddDynBean;
 import com.sto.asportclient.data.util.bean.Comms;
+import com.sto.asportclient.data.util.bean.DelDynBean;
 import com.sto.asportclient.data.util.bean.Dyns;
 
 import java.io.File;
@@ -28,4 +29,6 @@ public interface CommunityDat {
     public void getClassmateDyns(Long stu_nmb, Integer pageNo, final Integer pageSize,@NonNull Repertory.GetDataListener<Dyns> listener);
 
     public void pushDyn(String title, String content, File img,@NonNull Repertory.GetDataListener<AddDynBean> listener);
+
+    public void deleteDyn(Long dynId, Repertory.GetDataListener<DelDynBean> listener);
 }
