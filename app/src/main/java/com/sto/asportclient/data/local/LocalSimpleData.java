@@ -11,18 +11,18 @@ import com.sto.asportclient.data.Config;
 
 public class LocalSimpleData implements Config{
     private static LocalSimpleData staticInstance;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences loginSharedPreferences; // 登录相关
     private Context context;
 
     private  LocalSimpleData(Context context) {
         this.context = context;
-        sharedPreferences =  context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        loginSharedPreferences =  context.getSharedPreferences("config",Context.MODE_PRIVATE);
     }
 
     public static LocalSimpleData getInstance(Context context) {
-        if(staticInstance == null) {
+        if (staticInstance == null) {
             synchronized (LocalSimpleData.class) {
-                if(staticInstance == null) {
+                if (staticInstance == null) {
                     staticInstance = new LocalSimpleData(context);
                 }
             }
@@ -32,7 +32,7 @@ public class LocalSimpleData implements Config{
 
     @Override
     public void savaUserAndPwd(User user) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editor = loginSharedPreferences.edit();
         editor.putString("username",user.user);
         editor.putString("password",user.pwd);
         editor.commit();
@@ -40,11 +40,42 @@ public class LocalSimpleData implements Config{
 
     public User getUserAndPwd() {
         User user = new User();
-        user.user = sharedPreferences.getString("username","-1");
-        user.pwd = sharedPreferences.getString("password","-1");
+        user.user = loginSharedPreferences.getString("username","-1");
+        user.pwd = loginSharedPreferences.getString("password","-1");
         if("-1".equals(user.user) || "-1".equals(user.pwd))
             return null;
         else
             return user;
+    }
+
+    @Override
+    public void clearUserAndPwd() {
+        SharedPreferences.Editor editor = loginSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        SharedPreferences.Editor editor = loginSharedPreferences.edit();
+        editor.putBoolean("isAutoLogin",isAutoLogin);
+        editor.commit();
+    }
+
+    @Override
+    public Boolean getIsAutoLogin() {
+        return loginSharedPreferences.getBoolean("isAutoLogin",false);
+    }
+
+    @Override
+    public void setIsRememberUserPwd(boolean isRemember) {
+        SharedPreferences.Editor editor = loginSharedPreferences.edit();
+        editor.putBoolean("isRememberUserPwd",isRemember);
+        editor.commit();
+    }
+
+    @Override
+    public boolean getIsRememberUserPwd() {
+        return loginSharedPreferences.getBoolean("isRememberUserPwd",false);
     }
 }

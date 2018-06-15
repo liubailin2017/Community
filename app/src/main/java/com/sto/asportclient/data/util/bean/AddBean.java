@@ -1,6 +1,6 @@
 package com.sto.asportclient.data.util.bean;
 
-public class AddDynBean {
+public class AddBean {
 
     /**
      * result : F

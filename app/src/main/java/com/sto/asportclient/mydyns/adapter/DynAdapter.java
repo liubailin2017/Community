@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sto.asportclient.R;
+import com.sto.asportclient.comment.CommentActivity;
 import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.mydyns.MyDynsContract;
@@ -23,16 +24,19 @@ import com.sto.asportclient.util.MyToast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DynAdapter extends BaseAdapter{
     private MyDynsContract.Presenter presenter;
     private Context mContext;
     private Dyns.DynsBean list;
-
-    public DynAdapter(Context mContext, Dyns.DynsBean list,@NonNull MyDynsContract.Presenter presenter) {
+    MyDynsContract.View  view;
+    public DynAdapter(Context mContext, Dyns.DynsBean list, @NonNull MyDynsContract.Presenter presenter, MyDynsContract.View view) {
         this.list = list;
         this.mContext = mContext;
         this.presenter = presenter;
+        this.view = view;
     }
 
     @Override
@@ -91,6 +95,14 @@ public class DynAdapter extends BaseAdapter{
             }
         });
         holder.title.setText(item.getTitle());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map map = new HashMap();
+                map.put("dynbean",item);
+                view.toActivity(CommentActivity.class,presenter.getUser(),map);
+            }
+        });
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
         holder.content.setText(item.getContent()+"\n"+new Date(item.getTime()).toString());
         Glide.with(mContext)

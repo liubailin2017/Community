@@ -7,7 +7,7 @@ import android.os.Looper;
 import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.remote.RepertoryImpl;
-import com.sto.asportclient.data.util.bean.AddDynBean;
+import com.sto.asportclient.data.util.bean.AddBean;
 import com.sto.asportclient.util.MyToast;
 
 import java.io.File;
@@ -33,9 +33,9 @@ public class AddDynPresenter implements AddDynContract.Presenter {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    RepertoryImpl.getInstance().getCommunityDatInstance().pushDyn( title, content,img, new Repertory.GetDataListener<AddDynBean>() {
+                    RepertoryImpl.getInstance().getCommunityDatInstance().pushDyn( title, content,img, new Repertory.GetDataListener<AddBean>() {
                         @Override
-                        public void onSucceed(final AddDynBean data) {
+                        public void onSucceed(final AddBean data) {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {

@@ -1,5 +1,6 @@
 package com.sto.asportclient.data.util.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class Dyns {
@@ -123,7 +124,7 @@ public class Dyns {
             this.list = list;
         }
 
-        public static class DynBean {
+        public static class DynBean implements Serializable{
             /**
              * content : 测试
              * dynId : 7

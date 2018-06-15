@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -18,7 +21,9 @@ import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.util.MyToast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ClassMateDynsActivity extends BaseActivity implements ClassmateDynsContract.View {
     private  User user;
@@ -26,13 +31,30 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
     private ListView listView;
     private ClassmateDynsContract.Presenter presenter;
     private DynAdapter adapter;
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     private  void init() {
         swip = $$(R.id.classmate_refreshLayout);
         listView = $$(R.id.tv_classmatedyn_listview);
-        Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
-        adapter = new DynAdapter(this,dynsBean,presenter);
-        listView.setAdapter(adapter);
+        toolbar = $$(R.id.classmatedyns_toolbar);
+
+        collapsingToolbarLayout = $$(R.id.classmatedyns_collToolbar);
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTitleText2));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitleText));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         presenter = new ClassmateDynsPresenter(this,user);
+        Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
+        adapter = new DynAdapter(this,dynsBean,presenter,this);
+        listView.setAdapter(adapter);
+        listView.setNestedScrollingEnabled(true);
         presenter.updateMydyn();
         swip.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -85,7 +107,18 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
     @Override
     public void toActivity(Class<? extends Activity> activity, User user) {
         Intent intent = new Intent(this,activity);
+
         intent.putExtra("user",user);
+        startActivity(intent);
+    }
+
+    @Override
+    public void toActivity(Class<? extends Activity> activity, User user,Map<String,Serializable> map) {
+        Intent intent = new Intent(this,activity);
+        intent.putExtra("user",user);
+        for(String key :map.keySet()) {
+            intent.putExtra(key,map.get(key));
+        }
         startActivity(intent);
     }
 

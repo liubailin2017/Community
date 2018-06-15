@@ -18,7 +18,7 @@ public class Comms {
     public ArrayList<CommsBean> removeCommsForDyns() {
         ArrayList<CommsBean> commsBeans = new ArrayList<>();
         for(int i = 0; i< comms.size(); i++) {
-            if(comms.get(i).getCom_commnet_id() == -1) {
+            if(comms.get(i).getCom_commnet_id()==-1 ) {
                 commsBeans.add(comms.get(i));
                 comms.remove(i);
                 i--;
@@ -42,13 +42,16 @@ public class Comms {
 
     public int removeCommsForComms(CommsBean forComms) {
         int count = 0;
+        Log.i("XXXXX",comms.toString());
         /**
          * 递归遍历
          */
         for(int i = comms.size()-1; i>=0;i--) {
 //            if(i > comms.size()-1) i = comms.size()-1;
             CommsBean t = comms.get(i);
-            if(t.getCom_commnet_id() == forComms.getComment().getComment_id()) {
+            Log.i("msg","+++++++"+t.toString()+"compare"+forComms.toString());
+            if(t.getCom_commnet_id().equals(forComms.getComment().getComment_id()) ) {
+                Log.i("XXXXX","XXXXXXXXXXXX");
                 t.setForComms_nickName(forComms.getStu_nickName());
                 t.setForComms_nmb(forComms.getStu_nmb());
                 tmp.add(t);
@@ -140,7 +143,7 @@ public class Comms {
         public static class CommentBean {
 
             private Date date;
-            private int comment_id;
+            private Long comment_id;
             private String content;
 
             public Date getDate() {
@@ -155,11 +158,11 @@ public class Comms {
                 this.date = new Date(date);
             }
 
-            public int getComment_id() {
+            public Long getComment_id() {
                 return comment_id;
             }
 
-            public void setComment_id(int comment_id) {
+            public void setComment_id(Long comment_id) {
                 this.comment_id = comment_id;
             }
 

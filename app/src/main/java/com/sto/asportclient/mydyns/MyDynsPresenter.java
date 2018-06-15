@@ -144,6 +144,11 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
         }).start();
     }
 
+    @Override
+    public User getUser() {
+        return user;
+    }
+
 
     @Override
     public void setView(BaseView view) {

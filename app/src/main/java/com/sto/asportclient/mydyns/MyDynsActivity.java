@@ -3,7 +3,9 @@ package com.sto.asportclient.mydyns;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +25,9 @@ import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.mydyns.adapter.DynAdapter;
 import com.sto.asportclient.util.MyToast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MyDynsActivity extends BaseActivity implements MyDynsContract.View {
     private  User user;
@@ -33,11 +37,15 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     private DynAdapter adapter;
     private TextView nicknameView;
     private Toolbar toolbar;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     private  void init() {
         toolbar = $$(R.id.mydyns_toolbar);
         swip = $$(R.id.mydyns_refreshLayout);
         listView = $$(R.id.tv_mydyn_listview);
         nicknameView = $$(R.id.tv_nickName_mydyn);
+        collapsingToolbarLayout = $$(R.id.mydyns_collToolbar);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -46,9 +54,13 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
                 finish();
             }
         });
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTitleText2));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitleText));
+        collapsingToolbarLayout.setDrawingCacheBackgroundColor(getResources().getColor(R.color.colorTitleText2));
+
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
         presenter = new MyDynsPresenter(this,user);
-        adapter = new DynAdapter(this,dynsBean,presenter);
+        adapter = new DynAdapter(this,dynsBean,presenter,this);
         listView.setAdapter(adapter);
         listView.setNestedScrollingEnabled(true);
         nicknameView.setText(user.getNickname());
@@ -104,6 +116,16 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     public void toActivity(Class<? extends Activity> activity, User user) {
         Intent intent = new Intent(this,activity);
         intent.putExtra("user",user);
+        startActivity(intent);
+    }
+
+    @Override
+    public void toActivity(Class<? extends Activity> activity, User user, Map<String,Serializable> map) {
+        Intent intent = new Intent(this,activity);
+        intent.putExtra("user",user);
+        for(String key :map.keySet()) {
+            intent.putExtra(key,map.get(key));
+        }
         startActivity(intent);
     }
 

@@ -40,7 +40,12 @@ public class LoginPresenter implements LoginContract.Presenter {
                                  */
                                 view.toActivity(MainPageAboutMe.class,user);
                                 view.finish();
-                                remember(username,password);
+                                if(view.isCheckRemember())
+                                    remember(username,password);
+                                else
+                                    repertory.getConfig(view.getContext()).clearUserAndPwd();
+                                repertory.getConfig(view.getContext()).setIsAutoLogin(view.isAutoLogin());
+                                repertory.getConfig(view.getContext()).setIsRememberUserPwd(view.isCheckRemember());
                             }
                         });
                     }
@@ -68,14 +73,19 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void recovery() {
         Config.User user = repertory.getConfig(view.getContext()).getUserAndPwd();
-        if(user != null)
-           view.setUser_pwd(user.user,user.pwd);
+        view.setIsAutoLogin(repertory.getConfig(view.getContext()).getIsAutoLogin());
+        view.setIsRemenber(repertory.getConfig(view.getContext()).getIsRememberUserPwd());
+        if(user != null) {
+            view.setUser_pwd(user.user, user.pwd);
+            if (repertory.getConfig(view.getContext()).getIsAutoLogin()) {
+                login(user.user, user.pwd);
+            }
+        }
     }
 
     public LoginPresenter(LoginContract.View view) {
         this.view = view;
     }
-
 
     @Override
     public void setView(BaseView view) {

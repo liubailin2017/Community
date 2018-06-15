@@ -32,31 +32,6 @@ public class MainActivity extends BaseActivity {
 
 
 
-    public void click(View view) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                RepertoryImpl.getInstance().getCommunityDatInstance().getComments(7, new Repertory.GetDataListener<Comms>() {
-                    @Override
-                    public void onSucceed(final Comms data) {
-                        Log.i("data",data.toString());
-                        ArrayList<Comms.CommsBean> arrayList = data.removeCommsForDyns();
-                        for(int i = 0; i< arrayList.size();i++) {
-                            Log.i(arrayList.get(i).getStu_nickName()+"回复"+arrayList.get(i).getForComms_nickName(),"+"+arrayList.get(i).getComment().getContent());
-                            data.removeCommsForComms(arrayList.get(i));
-                            ArrayList<Comms.CommsBean> arrayList2 = data.back();
-                            for(int j =0;j< arrayList2.size();j++) {
-                                Log.i(arrayList2.get(j).getStu_nickName()+"回复"+arrayList2.get(j).getForComms_nickName(),arrayList2.get(j).getComment().getContent());
-                            }
-                        }
-                    }
-                    @Override
-                    public void Failed(Repertory.FailedMsg msg) {
 
-                    }
-                });
-            }
-        }).start();
-    }
 
 }

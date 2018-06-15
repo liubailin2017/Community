@@ -15,7 +15,7 @@
                 android:id="@+id/tv_DynImg"
                 android:layout_gravity="center"
                 android:layout_width="450dp"
-                android:layout_height= "300dp"
+                android:layout_height= "260dp"
                 android:scaleType="centerCrop"/>
             <TextView
                 android:id="@+id/tv_title"

@@ -22,7 +22,10 @@ public class LoginContract {
         public void hideLoading();
 
         public void setUser_pwd(String user,String passwd);
+        public void setIsAutoLogin(boolean isAutoLogin);
+        public void setIsRemenber(boolean isRemenber);
         public boolean isCheckRemember();
+        public boolean isAutoLogin();
 
         public void showMsg(String msg);
 

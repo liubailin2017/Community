@@ -110,6 +110,11 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
     }
 
     @Override
+    public User getUser() {
+        return user;
+    }
+
+    @Override
     public void setView(BaseView view) {
         this.view = (ClassmateDynsContract.View) view;
     }

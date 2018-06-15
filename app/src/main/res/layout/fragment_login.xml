@@ -96,5 +96,23 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/checkbox_remember_pwd"
         android:gravity="bottom"
-        android:text="©2018-2019 LiuBailin All Rights Reserved."/>
+        android:text="简而不失其华。约不显其涩，这才是我们现在需要的。请用一张图片分享你的生活。"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_atuologin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginBtn"
+        android:layout_centerHorizontal="true"
+        android:text="自动登录" />
+
+    <TextView
+        android:id="@+id/logonBtn"
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_alignBottom="@+id/checkbox_remember_pwd"
+        android:layout_toStartOf="@+id/checkBox_atuologin"
+        android:text="注册" />
 </RelativeLayout>

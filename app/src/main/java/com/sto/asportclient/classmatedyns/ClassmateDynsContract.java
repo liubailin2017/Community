@@ -1,11 +1,15 @@
 package com.sto.asportclient.classmatedyns;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
+
+import java.io.Serializable;
+import java.util.Map;
 
 public class ClassmateDynsContract {
 
@@ -22,6 +26,7 @@ public class ClassmateDynsContract {
         public void showMsg(String msg);
 
         public  void toActivity(Class<? extends Activity> activity, User user);
+        public  void toActivity(Class<? extends Activity> activity, User user, Map<String,Serializable> map);
 
         public void upDateShowData(Dyns.DynsBean dyns);
 
@@ -39,6 +44,8 @@ public class ClassmateDynsContract {
          * 获得下一页数据并显示的listview上（核心实现）
           */
         public void loadNext();
+
+        public User getUser();
 
     }
 

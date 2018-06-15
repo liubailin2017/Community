@@ -10,11 +10,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,26 +24,17 @@ import com.nanchen.compresshelper.CompressHelper;
 import com.sto.asportclient.BaseActivity;
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
-import com.sto.asportclient.data.CommunityDat;
-import com.sto.asportclient.data.Repertory;
-import com.sto.asportclient.data.remote.CommunityDatImp;
-import com.sto.asportclient.data.remote.RepertoryImpl;
-import com.sto.asportclient.data.util.bean.AddDynBean;
 import com.sto.asportclient.util.ImgUtil;
 import com.sto.asportclient.util.MyToast;
 import com.sto.asportclient.util.WaitDialog;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class AddDynActivity extends BaseActivity implements AddDynContract.View {
     private ImageView imageView;
     private static final int CROP_PHOTO = 2;
     private static final int REQUEST_CODE_PICK_IMAGE=3;
-    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 6;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE2 = 7;
     private File updateFile = null;
     private Uri imageUri;
@@ -173,7 +162,6 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
         startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
@@ -191,12 +179,10 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-
     public void upload(View view) {
         Log.i("file:","com.sto.asportclient.adddyn.AddDynActivity:"+updateFile);
          if(updateFile != null && !"gif".equals(ImgUtil.getImageType(updateFile.getPath())))
              if(updateFile != null) updateFile =  CompressHelper.getDefault(this).compressToFile(updateFile);
         presenter.addDyn(editText_title.getText().toString(),editText_content.getText().toString(),updateFile);
-
     }
 }

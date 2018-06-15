@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mydyns.MyDynsActivity"
-    android:orientation="vertical">
+    xmlns:tool="http://schemas.android.com/tools"
+    tool:context=".classmatedyns.ClassMateDynsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/classmatedyns_appbar"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <android.support.design.widget.CollapsingToolbarLayout
+            app:contentScrim="@color/colorPrimaryDark"
+            android:id="@+id/classmatedyns_collToolbar"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <ImageView
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                android:src="@drawable/th">
+            </ImageView>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/classmatedyns_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="@string/classmate_head">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/classmate_refreshLayout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.scwang.smartrefresh.header.StoreHouseHeader
-        app:shhText="Waiting"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-        <ListView
-            android:id="@+id/tv_classmatedyn_listview"
+        <com.scwang.smartrefresh.header.StoreHouseHeader
+            app:shhText="Waiting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#00000000"
-            android:dividerHeight="0dp">
-        </ListView>
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/tv_classmatedyn_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#00000000"
+                    android:dividerHeight="0dp">
+                </ListView>
+
+            </FrameLayout>
+        </LinearLayout>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

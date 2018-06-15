@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
     private DynAdapter adapter,adapter2;
     private Toolbar toolbar;
     private SwipeStack swipeStack1,swipeStack2;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     public User curUser() {
         return  user;
     }
@@ -41,6 +43,7 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         toolbar = $$(R.id.main_toolbar);
         swipeStack1 = $$(R.id.swipeStack1);
         swipeStack2 = $$(R.id.swipeStack2);
+        collapsingToolbarLayout = $$(R.id.main_page_colltoolbar);
         setSupportActionBar(toolbar);
         Dyns.DynsBean dynsBean = new Dyns.DynsBean(0,0,0,0,0,0,0,0,new ArrayList<Dyns.DynsBean.DynBean>());
         adapter = new DynAdapter(MainPageAboutMe.this,dynsBean,presenter);
@@ -79,6 +82,9 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
                 swipeStack2.resetStack();
             }
         });
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTitleText2));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitleText));
+
         setPresenter(new MainPagePresenter(this,user));
         presenter.updateMydyn();
         presenter.updateClassmete();

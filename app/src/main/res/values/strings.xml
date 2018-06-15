@@ -2,5 +2,6 @@
     <string name="app_name">School Community</string>
     <string name="main_page_aboutme_name">Home</string>
     <string name="my_dyn_head">My Dynamic</string>
+    <string name="classmate_head">Friends Community</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

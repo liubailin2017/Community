@@ -3,18 +3,16 @@ package com.sto.asportclient.data.remote;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.sto.asportclient.data.CommunityDat;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
-import com.sto.asportclient.data.util.bean.AddDynBean;
+import com.sto.asportclient.data.util.bean.AddBean;
 import com.sto.asportclient.data.util.bean.Comms;
 import com.sto.asportclient.data.util.bean.DelDynBean;
 import com.sto.asportclient.data.util.bean.Dyns;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -59,6 +57,40 @@ public class CommunityDatImp implements CommunityDat {
                 if(str_json!=null)
                     comms = JSON.parseObject(str_json,Comms.class);
                 listener.onSucceed(comms);
+            }
+        });
+    }
+
+    @Override
+    public void addComments(long dynId, String content, Long com_Comment_id, final Repertory.GetDataListener<AddBean> listener) {
+        FormBody.Builder builder = new FormBody.Builder()
+                .add("content",content)
+                .add("dynId",dynId+"")
+                .add("com_comment_id",com_Comment_id+"");
+
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(Config.URL_STR_AddComment)
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.Failed(new Repertory.FailedMsg(Config.ErrCode.NETREFUSE,e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                try {
+                    AddBean resObj = JSON.parseObject(res,AddBean.class);
+                    listener.onSucceed(resObj);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    listener.Failed(new Repertory.FailedMsg(Config.ErrCode.SERVICESERR,e.getMessage()));
+                }
             }
         });
     }
@@ -166,7 +198,7 @@ public class CommunityDatImp implements CommunityDat {
     }
 
     @Override
-    public void pushDyn(String title, String content, File img, final Repertory.GetDataListener<AddDynBean> listener) {
+    public void pushDyn(String title, String content, File img, final Repertory.GetDataListener<AddBean> listener) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("content",content)
                 .addFormDataPart("title",title);
@@ -192,7 +224,7 @@ public class CommunityDatImp implements CommunityDat {
             public void onResponse(Call call, Response response) throws IOException {
                 String res = response.body().string();
                 try {
-                    AddDynBean resObj = JSON.parseObject(res,AddDynBean.class);
+                    AddBean resObj = JSON.parseObject(res,AddBean.class);
                     listener.onSucceed(resObj);
                 }catch (Exception e) {
                     e.printStackTrace();

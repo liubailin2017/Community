@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.R;
@@ -27,8 +28,9 @@ public class LoginFra extends Fragment implements LoginContract.View {
     private EditText pwView = null;
     private Button button = null;
     private CheckBox checkBox_remember;
+    private CheckBox checkBox_auto;
     private LoginContract.Presenter presenter;
-
+    private TextView logonBtn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +50,23 @@ public class LoginFra extends Fragment implements LoginContract.View {
         userView = getView().findViewById(R.id.userView);
         button = getView().findViewById(R.id.loginBtn);
         checkBox_remember = getView().findViewById(R.id.checkbox_remember_pwd);
-
+        checkBox_auto = getView().findViewById(R.id.checkBox_atuologin);
+        logonBtn = getView().findViewById(R.id.logonBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String username = userView.getText().toString();
                 final String password = pwView.getText().toString();
                 presenter.login(username,password);
+            }
+        });
+        logonBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://45.40.202.230:8080/asport/logon.jsp");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
             }
         });
         presenter.recovery();
@@ -101,8 +113,23 @@ public class LoginFra extends Fragment implements LoginContract.View {
     }
 
     @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        checkBox_auto.setChecked(isAutoLogin);
+    }
+
+    @Override
+    public void setIsRemenber(boolean isRemenber) {
+            checkBox_remember.setChecked(isRemenber);
+    }
+
+    @Override
     public boolean isCheckRemember() {
         return checkBox_remember.isChecked();
+    }
+
+    @Override
+    public boolean isAutoLogin() {
+        return checkBox_auto.isChecked();
     }
 
     @Override

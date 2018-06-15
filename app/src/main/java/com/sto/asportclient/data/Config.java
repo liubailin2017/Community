@@ -16,5 +16,11 @@ public interface Config {
     }
     public void savaUserAndPwd(User user);
     public User getUserAndPwd();
+    public void clearUserAndPwd();
+    public void setIsAutoLogin(boolean isAutoLogin);
+    public Boolean getIsAutoLogin();
+    public void setIsRememberUserPwd(boolean isRemember);
+    public boolean getIsRememberUserPwd();
+
 
 }

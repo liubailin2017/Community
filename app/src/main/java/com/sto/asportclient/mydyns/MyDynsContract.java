@@ -1,11 +1,15 @@
 package com.sto.asportclient.mydyns;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.sto.asportclient.BasePresenter;
 import com.sto.asportclient.BaseView;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
+
+import java.io.Serializable;
+import java.util.Map;
 
 public class MyDynsContract {
 
@@ -22,6 +26,7 @@ public class MyDynsContract {
         public void showMsg(String msg);
 
         public  void toActivity(Class< ? extends Activity> activity, User user);
+        public  void toActivity(Class< ? extends Activity> activity, User user, Map<String,Serializable> map);
 
         public void upDateShowData(Dyns.DynsBean dyns);
 
@@ -42,6 +47,8 @@ public class MyDynsContract {
 
 
         public void deleteDyn(Long dynId);
+
+        public User getUser();
     }
 
 }
