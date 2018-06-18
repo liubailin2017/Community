@@ -40,7 +40,7 @@ public class Comms {
         return t;
     }
 
-    public int removeCommsForComms(CommsBean forComms) {
+    public int removeCommsForComms(CommsBean forComms,int level) {
         int count = 0;
         Log.i("XXXXX",comms.toString());
         /**
@@ -51,13 +51,14 @@ public class Comms {
             CommsBean t = comms.get(i);
             Log.i("msg","+++++++"+t.toString()+"compare"+forComms.toString());
             if(t.getCom_commnet_id().equals(forComms.getComment().getComment_id()) ) {
-                Log.i("XXXXX","XXXXXXXXXXXX");
+//                Log.i("XXXXX","XXXXXXXXXXXX");
                 t.setForComms_nickName(forComms.getStu_nickName());
                 t.setForComms_nmb(forComms.getStu_nmb());
+                t.level = level;
                 tmp.add(t);
                 comms.remove(i);
                 count++;
-                int n =  removeCommsForComms(t);
+                int n =  removeCommsForComms(t, level+1);
                 count += n;
                 i-=n;
             }
@@ -82,7 +83,7 @@ public class Comms {
         private Long dyn;
         private CommentBean comment;
         private Long com_commnet_id;
-
+        public int level = 0; //层级
 
         public String getForComms_nickName() {
             return forComms_nickName;

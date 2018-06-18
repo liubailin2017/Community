@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".comment.CommentActivity"
     android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,34 +29,35 @@
         android:id="@+id/comment_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/classmate_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:gravity="center"
+            android:onClick="click2"
+            android:text="评 论     >>" />
 
-
+        <com.sto.asportclient.util.MyListView
+            android:id="@+id/comment_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.sto.asportclient.util.MyListView>
     </LinearLayout>
     </ScrollView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
+<!--
         <LinearLayout
             android:background="@color/colorAccent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ListView
-                android:id="@+id/comment_listview"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="match_parent"></ListView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
             <TextView
                 android:text="评论"
                 android:onClick="click2" android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </LinearLayout> -->
         <LinearLayout
-            android:background="@color/colorAccent"
             android:id="@+id/addcomment_editor"
             android:visibility="invisible"
             android:layout_width="match_parent"
@@ -60,29 +65,30 @@
             android:orientation="vertical">
             <EditText
                 android:id="@+id/edit_addcomment"
+                android:background="#aaaaaa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="top|left"
                 android:layout_weight="1"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_weight="3">
+                android:layout_weight="5">
                 <TextView
-                android:background="@color/colorTitleText2"
+                android:background="@color/colorAccent"
                 android:text="取消"
                 android:layout_weight="1"
                 android:onClick="click3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
                 <TextView
-                android:background="@color/colorTitleText"
+                android:background="@color/colorPrimary"
                 android:text="确认"
                 android:layout_weight="1"
                 android:onClick="click"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
             </LinearLayout>
         </LinearLayout>
 

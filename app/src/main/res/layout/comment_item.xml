@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 <TextView
+    android:foreground="@drawable/card_foreground_selector"
     android:id="@+id/comment_content_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />

@@ -93,12 +93,12 @@ public class CommentPresenter implements CommentContract.Presenter {
                 for(int i = 0; i< arrayList.size();i++) {
                     commsBeans.add(arrayList.get(i));
                     Log.i(arrayList.get(i).getStu_nickName()+"回复"+arrayList.get(i).getForComms_nickName(),"+"+arrayList.get(i).getComment().getContent());
-                    data.removeCommsForComms(arrayList.get(i));
+                    data.removeCommsForComms(arrayList.get(i),0);
                     ArrayList<Comms.CommsBean> arrayList2 = data.back();
                     commsBeans.addAll(arrayList2);
-                    for(int j =0;j< arrayList2.size();j++) {
-                        Log.i(arrayList2.get(j).getStu_nickName()+"回复"+arrayList2.get(j).getForComms_nickName(),arrayList2.get(j).getComment().getContent());
-                    }
+//                    for(int j =0;j< arrayList2.size();j++) {
+//                        Log.i(arrayList2.get(j).getStu_nickName()+"回复"+arrayList2.get(j).getForComms_nickName(),arrayList2.get(j).getComment().getContent());
+//                    }
                 }
 
                 handler.post(new Runnable() {

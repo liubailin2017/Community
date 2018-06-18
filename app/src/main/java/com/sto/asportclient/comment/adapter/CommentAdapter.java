@@ -59,8 +59,13 @@ public class CommentAdapter extends BaseAdapter {
         }
         else {
             holder.content.setTextColor(context.getResources().getColor(R.color.colorTitleText));
-            holder.content.setText(item.getStu_nickName() + " 回复 " + item.getForComms_nickName() + ":" + item.getComment().getContent());
+            String t = "|-";
+            for(int i = 0; i< item.level;i++){
+                t= "| " + t;
+            }
+            holder.content.setText(t+item.getStu_nickName() + " 回复 " + item.getForComms_nickName() + ":" + item.getComment().getContent());
         }
+
         holder.content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
