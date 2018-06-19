@@ -1,6 +1,5 @@
 package com.sto.asportclient.data.util.bean;
 
-import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -42,28 +41,32 @@ public class Comms {
 
     public int removeCommsForComms(CommsBean forComms,int level) {
         int count = 0;
-        Log.i("XXXXX",comms.toString());
+//        Log.i("XXXXX",comms.toString());
         /**
          * 递归遍历
          */
+        int tCount = 0;
+        int n=0;
         for(int i = comms.size()-1; i>=0;i--) {
 //            if(i > comms.size()-1) i = comms.size()-1;
             CommsBean t = comms.get(i);
-            Log.i("msg","+++++++"+t.toString()+"compare"+forComms.toString());
+//            Log.i("msg","+++++++"+t.toString()+"compare"+forComms.toString());
             if(t.getCom_commnet_id().equals(forComms.getComment().getComment_id()) ) {
 //                Log.i("XXXXX","XXXXXXXXXXXX");
                 t.setForComms_nickName(forComms.getStu_nickName());
                 t.setForComms_nmb(forComms.getStu_nmb());
                 t.level = level;
                 tmp.add(t);
+                tCount++;
                 comms.remove(i);
-                count++;
-                int n =  removeCommsForComms(t, level+1);
+                n =  removeCommsForComms(t, level+1);
                 count += n;
                 i-=n;
             }
         }
-        return count;
+        if(tCount>0)
+             tmp.get(tmp.size()-1-n).isEnd = true;
+        return count + tCount;
     }
 
     public List<CommsBean> getComms() {
@@ -75,7 +78,7 @@ public class Comms {
     }
 
     public static class CommsBean {
-
+        public boolean isEnd;
         private Long stu_nmb;
         private String stu_nickName;
         private String forComms_nickName;

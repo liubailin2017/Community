@@ -59,11 +59,33 @@ public class CommentAdapter extends BaseAdapter {
         }
         else {
             holder.content.setTextColor(context.getResources().getColor(R.color.colorTitleText));
-            String t = "|-";
-            for(int i = 0; i< item.level;i++){
-                t= "| " + t;
+            String t = "";
+
+            for(int i = 0; i< comms.get(position).level;i++){
+                boolean is_ = false;
+                for(int j = position+1; j<comms.size();j++) {
+                    if(comms.get(j).level < i) {
+                        is_ = false;
+                        break;
+                    }
+                    if (comms.get(j).level == i){
+                        is_ = true;
+                        break;
+                    }
+                }
+
+                if(is_)
+                    t= t + "│";
+                else
+                    t= t + " ";
             }
-            holder.content.setText(t+item.getStu_nickName() + " 回复 " + item.getForComms_nickName() + ":" + item.getComment().getContent());
+
+            if(!item.isEnd)
+                 t+="├─";
+            else
+                 t+="└─";
+
+            holder.content.setText(t+item.getStu_nickName() +":" + item.getComment().getContent());
         }
 
         holder.content.setOnClickListener(new View.OnClickListener() {

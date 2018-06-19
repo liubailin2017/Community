@@ -90,13 +90,14 @@
         android:layout_marginEnd="37dp"
         android:text="记住密码"
         android:textColor="@android:color/background_light" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/checkbox_remember_pwd"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:gravity="bottom"
-        android:text="简而不失其华。约不显其涩，这才是我们现在需要的。请用一张图片分享你的生活。"/>
+        android:text="简而不失其华。约不显其涩，这才是我们现在需要的。请用一张图片分享你的生活。" />
 
     <CheckBox
         android:id="@+id/checkBox_atuologin"
@@ -108,11 +109,13 @@
 
     <TextView
         android:id="@+id/logonBtn"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_alignBottom="@+id/checkbox_remember_pwd"
-        android:layout_toStartOf="@+id/checkBox_atuologin"
-        android:text="注册" />
+        android:layout_height="71dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="14dp"
+        android:text="没有账号？"
+        android:textColor="#0a02ff"
+        android:textSize="18dp" />
 </RelativeLayout>

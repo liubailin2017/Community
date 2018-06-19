@@ -64,7 +64,11 @@ public class DynAdapter extends BaseAdapter{
         final Dyns.DynsBean.DynBean item = list.getList().get(position);
         holder.title.setText(item.getTitle());
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
-        holder.content.setText(item.getContent()+"\n"
+        String content = item.getContent();
+        if(content.length() > 300) {
+            content = content.substring(0,300) + " ·····";
+        }
+        holder.content.setText(content+"\n"
                 +new Date(item.getTime()).toString() + "  by "+item.getNickName());
 
         Glide.with(mContext)

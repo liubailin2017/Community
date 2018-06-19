@@ -103,8 +103,12 @@ public class DynAdapter extends BaseAdapter{
                 view.toActivity(CommentActivity.class,presenter.getUser(),map);
             }
         });
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
-        holder.content.setText(item.getContent()+"\n"+new Date(item.getTime()).toString());
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
+        String content = item.getContent();
+        if(content.length() > 300) {
+            content = content.substring(0,300) + " ·····";
+        }
+        holder.content.setText(content+"\n"+new Date(item.getTime()).toString());
         Glide.with(mContext)
                 .load(Config.url_str_dynimg_base+item.getImgId())
 //                .error(R.drawable.noimg)

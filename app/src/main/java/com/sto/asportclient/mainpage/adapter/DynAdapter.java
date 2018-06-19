@@ -52,6 +52,7 @@ public class DynAdapter extends BaseAdapter{
             holder.title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.content = (TextView) convertView.findViewById(R.id.tv_content);
             holder.img = (ImageView) convertView.findViewById(R.id.tv_DynImg);
+            holder.footer = convertView.findViewById(R.id.tv_footer);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -59,7 +60,12 @@ public class DynAdapter extends BaseAdapter{
 
         Dyns.DynsBean.DynBean item = list.getList().get(position);
         holder.title.setText(item.getTitle());
-        holder.content.setText(new Date(item.getTime()).toString()+" by " + item.getNickName());
+        String content = item.getContent();
+        if(content.length() > 300) {
+            content = content.substring(0,300) + " ·····";
+        }
+        holder.content.setText(content);
+        holder.footer.setText(new Date(item.getTime()).toString()+ "by " + item.getNickName());
         Glide.with(mContext)
                 .load(Config.url_str_dynimg_base+item.getImgId())
                 .into(holder.img);
@@ -69,6 +75,7 @@ public class DynAdapter extends BaseAdapter{
     private class ViewHolder {
         TextView title;
         TextView content;
+        TextView footer;
         ImageView img;
     }
 

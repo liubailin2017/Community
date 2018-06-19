@@ -20,7 +20,9 @@
     <ImageView
         android:id="@+id/comment_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:minHeight="30dp"/>
     <TextView
         android:id="@+id/comment_title"
         android:layout_width="match_parent"
@@ -63,6 +65,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <!-- 填充状态栏-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
             <EditText
                 android:id="@+id/edit_addcomment"
                 android:background="#aaaaaa"
@@ -76,19 +82,19 @@
                 android:orientation="horizontal"
                 android:layout_weight="5">
                 <TextView
-                android:background="@color/colorAccent"
-                android:text="取消"
-                android:layout_weight="1"
-                android:onClick="click3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                    android:background="@color/colorAccent"
+                    android:text="取消"
+                    android:layout_weight="1"
+                    android:onClick="click3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
                 <TextView
-                android:background="@color/colorPrimary"
-                android:text="确认"
-                android:layout_weight="1"
-                android:onClick="click"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                    android:background="@color/colorPrimary"
+                    android:text="确认"
+                    android:layout_weight="1"
+                    android:onClick="click"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
         </LinearLayout>
 
