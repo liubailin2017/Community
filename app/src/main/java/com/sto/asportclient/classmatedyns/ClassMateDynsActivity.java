@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -68,12 +69,6 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
             }
         });
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MyToast.getInstance(ClassMateDynsActivity.this).ShowToast(position+"");
-//            }
-//        });
     }
 
     @Override
@@ -148,5 +143,14 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

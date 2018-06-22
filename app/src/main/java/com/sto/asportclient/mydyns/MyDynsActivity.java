@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -48,12 +49,6 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTitleText2));
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitleText));
         collapsingToolbarLayout.setDrawingCacheBackgroundColor(getResources().getColor(R.color.colorTitleText2));
@@ -163,5 +158,14 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
                 toActivity(AddDynActivity.class,user);
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
