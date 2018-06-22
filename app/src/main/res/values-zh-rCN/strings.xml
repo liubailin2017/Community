@@ -4,4 +4,5 @@
     <string name="my_dyn_head">我的动态 </string>
     <string name="classmate_head">同学的动态</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="adddyn_title">添加动态</string>
 </resources>

@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
         android:id="@+id/addDynToolbar"
         android:background="@color/colorPrimary"
-
+        app:title="@string/adddyn_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -36,9 +37,7 @@
                 android:gravity="right"
                 android:background="@drawable/bg_editview"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
+                android:layout_margin="10dp"
                 android:hint="title"
                 android:text="" />
 
@@ -48,14 +47,15 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_editview"
                 android:hint="content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
                 android:maxLines="10"
                 android:text="" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
+                android:layout_margin="10dp"
                 android:background="@android:color/holo_green_dark"
                 android:onClick="upload"
                 android:text="发表" />
