@@ -25,12 +25,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
-        android:background="#fff"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="44dp"
-            android:background="#fff"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
@@ -39,28 +37,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@null"
+                android:background="@drawable/bg_editview"
                 android:imeOptions="actionDone"
                 android:textSize="16sp"
                 android:ems="10"
+                android:padding="10dp"
                 android:hint="请输入用户名">
             </EditText>
         </LinearLayout>
         <View
             android:layout_width="fill_parent"
-            android:layout_height="1.0px"
+            android:layout_height="3.0px"
             android:layout_marginLeft="1.0px"
-            android:layout_marginRight="1.0px"
-            android:background="#ffc0c3c4" />
+            android:layout_marginRight="1.0px"/>
         <EditText
             android:id="@+id/pwView"
             android:layout_width="fill_parent"
             android:layout_height="44.0dip"
-            android:background="#00ffffff"
+            android:background="@drawable/bg_editview"
             android:gravity="center_vertical"
             android:inputType="textPassword"
             android:maxLength="16"
             android:maxLines="1"
+            android:padding="10dp"
             android:textColor="#ff1d1d1d"
             android:textColorHint="#ff666666"
             android:textSize="16.0sp"
@@ -73,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/input"
         android:layout_marginTop="10dp"
-        android:background="#3aadfd"
+        android:background="@color/colorPrimary"
         android:text="登  录"
         android:textColor="#ffffff"
         android:textSize="18dp"
@@ -116,6 +115,6 @@
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="14dp"
         android:text="没有账号？"
-        android:textColor="#0a02ff"
+        android:textColor="@color/colorPrimary"
         android:textSize="18dp" />
 </RelativeLayout>

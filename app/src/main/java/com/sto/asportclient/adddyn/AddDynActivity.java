@@ -14,7 +14,11 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,7 +45,7 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
     private EditText editText_title;
     private EditText editText_content;
     AddDynContract.Presenter presenter;
-
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,9 +138,39 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
         imageView=(ImageView)findViewById(R.id.image);
         editText_title = $$(R.id.add_edit_title);
         editText_content = $$(R.id.add_edit_content);
+        toolbar = $$(R.id.addDynToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_item_setimg:
+                        choosePhone();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
-    public void choosePhone(View view){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_adddyn_items,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void choosePhone(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED)
@@ -181,8 +215,9 @@ public class AddDynActivity extends BaseActivity implements AddDynContract.View 
 
     public void upload(View view) {
         Log.i("file:","com.sto.asportclient.adddyn.AddDynActivity:"+updateFile);
-         if(updateFile != null && !"gif".equals(ImgUtil.getImageType(updateFile.getPath())))
-             if(updateFile != null) updateFile =  CompressHelper.getDefault(this).compressToFile(updateFile);
+        if(updateFile != null && !"gif".equals(ImgUtil.getImageType(updateFile.getPath())))
+            if(updateFile != null) updateFile =  CompressHelper.getDefault(this).compressToFile(updateFile);
         presenter.addDyn(editText_title.getText().toString(),editText_content.getText().toString(),updateFile);
     }
+
 }
