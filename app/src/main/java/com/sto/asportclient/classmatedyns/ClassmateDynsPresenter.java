@@ -36,16 +36,16 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
                  * 这里是更新，不是加载，别看错了。
                  */
                 repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
-                    @Override
-                    public void onSucceed(final Dyns data) {
+                                    @Override
+                                    public void onSucceed(final Dyns data) {
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                view.upDateShowData(data.getDyns());
-                                view.hideRefreshing();
-                                curPageNo = data.getDyns().getPageNo();
-                                view.showMsg("更新完成");
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                view.upDateShowData(data.getDyns());
+                                                view.hideRefreshing();
+                                                curPageNo = data.getDyns().getPageNo();
+                                                view.showMsg("更新完成");
 
                             }
                         });

@@ -17,7 +17,3 @@ okhttp
 高德地图sdk
 #### 开发者
 1. [刘柏麟](https://gitee.com/liubailin2017)   [Home](https://liubailin2017.github.io/)
-2. 王煜想
-
-### 参观
-1. 吴健
