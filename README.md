@@ -1,7 +1,9 @@
 # ASportClient说明
 
 #### 项目介绍
-基于移动端GPS和传感器的运动打卡APP，采集学生的运动数据，这样就形成学生一次运动的完整记录。
+一个校园区app。
+#### [app主页](https://liubailin2017.github.io/2018/06/16/my-shool-main-page/)
+
 #### 软件架构
 
 ![软件架构说明](./img__/mvp.png)
@@ -17,3 +19,6 @@ okhttp
 高德地图sdk
 #### 开发者
 1. [刘柏麟](https://gitee.com/liubailin2017)   [Home](https://liubailin2017.github.io/)
+
+
+[服务器地址](https://gitee.com/liubailin2017/comm)
