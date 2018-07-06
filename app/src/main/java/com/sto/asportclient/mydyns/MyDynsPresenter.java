@@ -14,15 +14,16 @@ import com.sto.asportclient.util.MyToast;
 
 public class MyDynsPresenter implements MyDynsContract.Presenter {
     private MyDynsContract.View view;
-    private User user;
+    CommunityDat communityDat = RepertoryImpl.getInstance().getCommunityDatInstance();
+    Repertory repertory= RepertoryImpl.getInstance();
     private Handler handler = new Handler(Looper.getMainLooper());
 
     private int pageSize = 6;
     private int curPageNo = 1;
 
     public MyDynsPresenter(MyDynsContract.View view, User user) {
-        this.user = user;
         this.view = view;
+        view.setUser(repertory.getCurUser());
     }
 
     @Override
@@ -31,11 +32,10 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
                 /**
                  * 这里是更新，不是加载，别看错了。
                  */
-                repertory.getDynsSelect(Long.parseLong(user.getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
+                communityDat.getDynsSelect(Long.parseLong(repertory.getCurUser().getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
 
@@ -71,8 +71,7 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getDynsSelect(Long.parseLong(user.getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
+                communityDat.getDynsSelect(Long.parseLong(repertory.getCurUser().getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         curPageNo = data.getDyns().getPageNo();
@@ -113,20 +112,23 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
             @Override
             public void run() {
                 CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                /**
-                 * 这里是更新，不是加载，别看错了。
-                 */
+
                 repertory.deleteDyn(dynId, new Repertory.GetDataListener<DelDynBean>() {
 
                     @Override
-                    public void onSucceed(DelDynBean data) {
+                    public void onSucceed(final DelDynBean data) {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                updateMydyn();
+                                if("S".equals(data.getResult())) {
+                                    updateMydyn();
+                                }
+                                else
+                                {
+                                    view.showMsg("删除失败："+data.getMsg());
+                                }
                             }
                         });
-
                     }
 
                     @Override
@@ -142,11 +144,6 @@ public class MyDynsPresenter implements MyDynsContract.Presenter {
                 });
             }
         }).start();
-    }
-
-    @Override
-    public User getUser() {
-        return user;
     }
 
 

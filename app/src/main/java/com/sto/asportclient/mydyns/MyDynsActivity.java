@@ -58,7 +58,6 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
         adapter = new DynAdapter(this,dynsBean,presenter,this);
         listView.setAdapter(adapter);
         listView.setNestedScrollingEnabled(true);
-        nicknameView.setText(user.getNickname());
         presenter.updateMydyn();
         swip.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -83,7 +82,6 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_dyns);
-        user = (User) getIntent().getExtras().get("user");
         init();
     }
 
@@ -134,6 +132,12 @@ public class MyDynsActivity extends BaseActivity implements MyDynsContract.View 
     public void addData(Dyns.DynsBean dyns) {
         adapter.addDynsBean(dyns);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
+        nicknameView.setText(user.getNickname());
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.sto.asportclient.data;
 
+/**
+ * app的设置，比如是否自动登录等
+ */
 public interface Config {
 
     public class  User {

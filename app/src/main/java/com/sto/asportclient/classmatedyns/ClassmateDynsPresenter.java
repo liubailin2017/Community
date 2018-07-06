@@ -16,7 +16,8 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
     private ClassmateDynsContract.View view;
     private User user;
     private Handler handler = new Handler(Looper.getMainLooper());
-
+    private CommunityDat communityDat = RepertoryImpl.getInstance().getCommunityDatInstance();
+    private Repertory repertory= RepertoryImpl.getInstance();
     private int pageSize = 6;
     private int curPageNo = 1;
 
@@ -31,11 +32,10 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
                 /**
                  * 这里是更新，不是加载，别看错了。
                  */
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
+                communityDat.getClassmateDyns(Long.parseLong(repertory.getCurUser().getUser()),1,pageSize, new Repertory.GetDataListener<Dyns>() {
                                     @Override
                                     public void onSucceed(final Dyns data) {
 
@@ -72,8 +72,7 @@ public class ClassmateDynsPresenter implements ClassmateDynsContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CommunityDat repertory = RepertoryImpl.getInstance().getCommunityDatInstance();
-                repertory.getClassmateDyns(Long.parseLong(user.getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
+                communityDat.getClassmateDyns(Long.parseLong(repertory.getCurUser().getUser()),curPageNo+1,pageSize, new Repertory.GetDataListener<Dyns>() {
                     @Override
                     public void onSucceed(final Dyns data) {
                         curPageNo = data.getDyns().getPageNo();

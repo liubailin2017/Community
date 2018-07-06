@@ -17,6 +17,7 @@ import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.data.util.bean.User;
 import com.sto.asportclient.mainpage.adapter.DynAdapter;
 import com.sto.asportclient.mydyns.MyDynsActivity;
+import com.sto.asportclient.passwd.UpdatePwActivity;
 import com.sto.asportclient.util.MyToast;
 
 import java.util.ArrayList;
@@ -126,9 +127,8 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
 
 
     @Override
-    public void toActivity(Class<? extends Activity> activity, User user) {
+    public void toActivity(Class<? extends Activity> activity) {
         Intent intent = new Intent(this,activity);
-        intent.putExtra("user",user);
         startActivity(intent);
     }
 
@@ -185,11 +185,14 @@ public class MainPageAboutMe extends BaseActivity implements MainPageContract.Vi
         switch (view.getId()) {
             case R.id.myDyns_line:
                 presenter.updateMydyn();
-                toActivity(MyDynsActivity.class,user);
+                toActivity(MyDynsActivity.class);
                 break;
             case R.id.classmate_line:
                 presenter.updateClassmete();
-                toActivity(ClassMateDynsActivity.class,user);
+                toActivity(ClassMateDynsActivity.class);
+                break;
+            case R.id.tv_nickName:
+                toActivity(UpdatePwActivity.class);
                 break;
         }
     }

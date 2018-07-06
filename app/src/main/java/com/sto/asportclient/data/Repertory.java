@@ -2,6 +2,7 @@ package com.sto.asportclient.data;
 
 import android.content.Context;
 
+import com.sto.asportclient.data.util.bean.UpdatePw;
 import com.sto.asportclient.data.util.bean.User;
 
 /**
@@ -11,6 +12,14 @@ public interface Repertory {
     public static interface LoginListener{
         public void onSucceed(User user);
         public void Failed(String msg);
+    }
+    /**
+     * 用来获取数据的
+     * @param <T>
+     */
+    public static interface GetDataListener<T> {
+        public void onSucceed(T data);
+        public void Failed(FailedMsg msg);
     }
 
     /**
@@ -53,16 +62,10 @@ public interface Repertory {
         }
     }
 
-    /**
-     * 用来获取数据的
-     * @param <T>
-     */
-    public static interface GetDataListener<T> {
-        public void onSucceed(T data);
-        public void Failed(FailedMsg msg);
-    }
 
-    public void login(String username, String password,LoginListener loginListener);
+    public void login(String username, String password, LoginListener loginListener);
+    public User getCurUser();
+    public void updatePw(String oldPw, String newPw, Repertory.GetDataListener<UpdatePw> listener);
     public void logon();
     public void logout();
 

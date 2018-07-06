@@ -16,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sto.asportclient.R;
 import com.sto.asportclient.comment.CommentActivity;
+import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
+import com.sto.asportclient.data.remote.RepertoryImpl;
 import com.sto.asportclient.data.util.bean.Dyns;
 import com.sto.asportclient.mydyns.MyDynsContract;
 import com.sto.asportclient.util.MyToast;
@@ -100,7 +102,7 @@ public class DynAdapter extends BaseAdapter{
             public void onClick(View v) {
                 Map map = new HashMap();
                 map.put("dynbean",item);
-                view.toActivity(CommentActivity.class,presenter.getUser(),map);
+                view.toActivity(CommentActivity.class, RepertoryImpl.getInstance().getCurUser(),map);
             }
         });
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");

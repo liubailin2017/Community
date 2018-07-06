@@ -7,6 +7,7 @@ import com.sto.asportclient.data.CommunityDat;
 import com.sto.asportclient.data.Repertory;
 import com.sto.asportclient.data.config.Config;
 import com.sto.asportclient.data.local.LocalSimpleData;
+import com.sto.asportclient.data.util.bean.UpdatePw;
 import com.sto.asportclient.data.util.bean.User;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RepertoryImpl implements Repertory{
-
+    private User curUser;
     private List<Cookie> cookies = new ArrayList<>();
     private static Repertory repertory = new RepertoryImpl();
     private CommunityDat communityDatInstance = null;
@@ -92,12 +93,56 @@ public class RepertoryImpl implements Repertory{
 
                     if(user.getResult().equals("S")) {
                         callback.onSucceed(user);
+                        curUser = user;
                     }
                     else{
                         callback.Failed(user.getMsg());
                     }
                 }
             });
+    }
+
+
+    @Override
+    public User getCurUser() {
+        return this.curUser;
+    }
+
+    /**
+     * 由于作者尝试不同的写法，所以可能风格和以前代码不一样。
+     * 这个方法只负责把参数传给服务器，并返回数据，并不做处理
+     */
+    @Override
+    public void updatePw(String oldPw, String newPw, final Repertory.GetDataListener<UpdatePw> listener) {
+        String stuNmb = getCurUser().getUser();
+        FormBody.Builder form = new FormBody.Builder()
+                .add("stu_nmb",stuNmb)
+                .add("passwd",oldPw)
+                .add("newpasswd",newPw);
+        Request request = new Request.Builder().url(Config.URL_STR_UpdatePw)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .post(form.build())
+                .build();
+        Call call = httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.Failed(new FailedMsg(0,e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                UpdatePw resObj;
+                try {
+                    resObj = JSON.parseObject(res,UpdatePw.class);
+                }catch (Exception e) {
+                    listener.Failed(new FailedMsg(1,e.getMessage()+"josn:"+res));
+                    return;
+                }
+                listener.onSucceed(resObj);
+            }
+        });
     }
 
     @Override

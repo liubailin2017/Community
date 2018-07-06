@@ -28,6 +28,7 @@ public class Config {
 
     public static final String URL_STR_AddComment = "http://"+IP+":8080/asport/addcommnet.do";
 
+    public static final String URL_STR_UpdatePw = "http://"+IP+":8080/asport/updatePw.do";
     public static class ErrCode {
         public static int NETREFUSE = 0; //网络没连通
         public static int SERVICESERR = 1; //服务出错

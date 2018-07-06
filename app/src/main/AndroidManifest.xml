@@ -38,8 +38,12 @@
         <activity android:name=".mainpage.MainPageAboutMe" />
         <activity android:name=".mydyns.MyDynsActivity" />
         <activity android:name=".classmatedyns.ClassMateDynsActivity" />
-        <activity android:name=".adddyn.AddDynActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".comment.CommentActivity"></activity>
+        <activity
+            android:name=".adddyn.AddDynActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".comment.CommentActivity" />
+        <activity android:name=".passwd.UpdatePwActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

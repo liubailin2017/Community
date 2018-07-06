@@ -31,7 +31,7 @@ public class MyDynsContract {
         public void upDateShowData(Dyns.DynsBean dyns);
 
         public void addData(Dyns.DynsBean dyns);
-
+        public void setUser(User user);
         public void clearData();
 
     }
@@ -47,8 +47,6 @@ public class MyDynsContract {
 
 
         public void deleteDyn(Long dynId);
-
-        public User getUser();
     }
 
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".passwd.UpdatePwActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/updatepwToolbar"
+        android:background="@color/colorPrimary"
+        app:title="@string/updatepw_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
+    <EditText
+        android:id="@+id/oldpwEdit"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:hint="当前密码"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/updatePwEdit1"
+        android:background="@drawable/bg_editview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="新密码"
+        android:ems="12"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/updatePwEdit2"
+        android:background="@drawable/bg_editview"
+        android:hint="确认密码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:inputType="textPassword" />
+    <Button
+        android:id="@+id/updatePwBtn"
+        android:background="@drawable/bg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:text="确定"/>
+</LinearLayout>

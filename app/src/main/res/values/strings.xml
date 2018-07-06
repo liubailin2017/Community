@@ -4,4 +4,5 @@
     <string name="my_dyn_head">My Dynamic</string>
     <string name="classmate_head">Friends Community</string>
     <string name="adddyn_title">Insert Dynamic</string>
+    <string name="updatepw_title">Change Password</string>
 </resources>

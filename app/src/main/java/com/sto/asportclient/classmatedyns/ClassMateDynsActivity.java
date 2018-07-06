@@ -75,7 +75,6 @@ public class ClassMateDynsActivity extends BaseActivity implements ClassmateDyns
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classmate_dyns);
-        user = (User) getIntent().getExtras().get("user");
         init();
     }
 

@@ -23,7 +23,7 @@ public class MainPageContract {
 
         public void showMsg(String msg);
 
-        public  void toActivity(Class< ? extends Activity> activity, User user);
+        public  void toActivity(Class< ? extends Activity> activity);
 
         public void upDateShowData(DynsBean dyns);
         public void upDateShowData2(DynsBean dyns);

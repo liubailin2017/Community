@@ -9,7 +9,7 @@ import android.view.View;
 import com.sto.asportclient.util.MyToast;
 import com.sto.asportclient.util.WaitDialog;
 
-public class BaseActivity extends AppCompatActivity {
+public class                          BaseActivity extends AppCompatActivity {
 
     public <T extends View> T $$(int id) {
         return findViewById(id);

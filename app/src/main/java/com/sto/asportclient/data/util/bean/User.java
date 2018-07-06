@@ -7,11 +7,19 @@ public class User implements Serializable {
      * result : S
      * user : 163796
      */
-
+    private int head;
     private String result;
     private String user;
     private String nickname;
     private String msg;
+
+    public int getHead() {
+        return head;
+    }
+
+    public void setHead(int head) {
+        this.head = head;
+    }
 
     public String getNickname() {
         return nickname;
